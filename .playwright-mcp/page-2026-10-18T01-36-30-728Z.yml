@@ -1,0 +1,94 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - img [ref=e6]
+        - text: 코드노트
+      - generic [ref=e8]:
+        - button "새 노트" [ref=e9] [cursor=pointer]:
+          - img [ref=e10]
+          - generic [ref=e12]: 새 노트
+        - generic [ref=e13]: 교
+    - generic [ref=e14]:
+      - complementary [ref=e15]:
+        - paragraph [ref=e16]: MY CLASSROOM
+        - generic [ref=e17]:
+          - img [ref=e19]
+          - generic [ref=e21]:
+            - generic [ref=e22]: 정보 · 파이썬 기초
+            - generic [ref=e23]: 학습 노트 피드백
+        - navigation "학습 메뉴" [ref=e24]:
+          - button "노트 피드백" [ref=e25] [cursor=pointer]:
+            - img [ref=e26]
+            - text: 노트 피드백
+          - button "제출 기록" [ref=e28] [cursor=pointer]:
+            - img [ref=e29]
+            - text: 제출 기록
+        - generic [ref=e31]:
+          - img [ref=e33]
+          - strong [ref=e35]: 오늘의 작은 팁
+          - text: 오류는 틀린 답이 아니라, 코드를 더 잘 이해할 기회예요.
+      - main [ref=e36]:
+        - generic [ref=e37]:
+          - generic [ref=e38]:
+            - generic [ref=e39]: LEARNING JOURNAL / 01
+            - heading "오늘 배운 파이썬 정리하기" [level=1] [ref=e40]
+            - paragraph [ref=e41]: 배운 내용과 코드를 적으면, 문법을 살펴보고 고칠 점을 알려드려요.
+          - generic [ref=e42]: 기초 문법 · 1차시
+        - generic [ref=e43]:
+          - generic [ref=e44]:
+            - generic [ref=e45]: 학생 이름
+            - textbox "학생 이름" [ref=e46]: 김하늘
+          - generic [ref=e47]:
+            - generic [ref=e48]: 학급
+            - textbox "학급" [ref=e49]: 1학년 3반
+          - generic [ref=e50]: 저장하면 제출 기록에 남아요
+        - region "배운 내용과 코드" [ref=e51]:
+          - generic [ref=e52]:
+            - generic [ref=e53]:
+              - generic [ref=e54]: "01"
+              - generic [ref=e55]:
+                - heading "배운 내용과 코드" [level=2] [ref=e56]
+                - text: 기억나는 대로 편하게 적어보세요
+            - button "예시 불러오기" [ref=e57] [cursor=pointer]
+          - generic [ref=e58]:
+            - generic [ref=e59]:
+              - generic [ref=e60]:
+                - generic [ref=e61]: 오늘 배운 내용
+                - generic [ref=e62]: 무엇을 새롭게 알게 되었나요?
+              - textbox "오늘 배운 내용" [ref=e63]:
+                - /placeholder: "예: if문은 조건이 참일 때 코드를 실행하고, 조건 뒤에 콜론을 붙인다."
+            - generic [ref=e64]:
+              - generic [ref=e65]:
+                - generic [ref=e66]: 직접 작성한 파이썬 코드
+                - generic [ref=e67]: 코드가 없다면 비워도 괜찮아요
+              - generic [ref=e68]:
+                - generic [ref=e74]: PYTHON 3
+                - textbox "직접 작성한 파이썬 코드" [ref=e75]:
+                  - /placeholder: print('Hello, Python!')
+            - generic [ref=e76]:
+              - generic [ref=e77]:
+                - img [ref=e78]
+                - text: 입력한 내용은 이 브라우저에서 처리돼요
+              - button "노트 피드백 받기" [ref=e80] [cursor=pointer]:
+                - img [ref=e81]
+                - text: 노트 피드백 받기
+      - complementary "자동 피드백 및 제출 기록" [ref=e83]:
+        - generic [ref=e84]:
+          - generic [ref=e85]:
+            - generic [ref=e86]:
+              - img [ref=e88]
+              - text: CODE NOTE REVIEW
+            - heading "학습 피드백" [level=2] [ref=e90]
+            - paragraph [ref=e91]: 코드를 확인하고 한 단계씩 함께 살펴봐요.
+          - generic [ref=e93]:
+            - img [ref=e95]
+            - strong [ref=e97]: 노트를 기다리고 있어요
+            - paragraph [ref=e98]: 왼쪽에 오늘 배운 내용과 코드를 적고 피드백을 받아보세요.
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - heading "최근 제출 기록" [level=2] [ref=e101]
+            - button "기록 비우기" [ref=e102] [cursor=pointer]
+          - generic [ref=e104]: 아직 저장된 기록이 없어요.
+        - paragraph [ref=e105]: 문법 점검은 파이썬 기초 규칙을 바탕으로 브라우저에서 동작하는 데모예요. 복잡한 문법이나 실행 결과는 파이썬 환경에서 한 번 더 확인해 주세요.
+  - status

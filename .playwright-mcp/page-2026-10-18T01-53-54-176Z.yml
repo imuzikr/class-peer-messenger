@@ -1,0 +1,131 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - img [ref=e6]
+        - text: 다정
+      - generic "화면 선택" [ref=e10]:
+        - button "교사 화면" [ref=e11] [cursor=pointer]
+        - button "학생 화면" [ref=e12] [cursor=pointer]
+    - region "메신저" [ref=e14]:
+      - complementary "학급 캘린더":
+        - generic [ref=e15]:
+          - generic [ref=e16]:
+            - heading "학급 캘린더" [level=2] [ref=e17]
+            - button "캘린더 닫기" [ref=e18] [cursor=pointer]:
+              - img [ref=e19]
+          - generic [ref=e21]:
+            - strong [ref=e22]: 2026년 10월
+            - generic [ref=e23]:
+              - button "이전 달" [ref=e24] [cursor=pointer]:
+                - img [ref=e25]
+              - button "다음 달" [ref=e27] [cursor=pointer]:
+                - img [ref=e28]
+          - generic [ref=e30]:
+            - generic [ref=e31]: 월
+            - generic [ref=e32]: 화
+            - generic [ref=e33]: 수
+            - generic [ref=e34]: 목
+            - generic [ref=e35]: 금
+            - generic [ref=e36]: 토
+            - generic [ref=e37]: 일
+          - generic [ref=e38]:
+            - button "2026-09-28" [ref=e39] [cursor=pointer]: "28"
+            - button "2026-09-29" [ref=e40] [cursor=pointer]: "29"
+            - button "2026-09-30" [ref=e41] [cursor=pointer]: "30"
+            - button "2026-10-01" [ref=e42] [cursor=pointer]: "1"
+            - button "2026-10-02" [ref=e43] [cursor=pointer]: "2"
+            - button "2026-10-03" [ref=e44] [cursor=pointer]: "3"
+            - button "2026-10-04" [ref=e45] [cursor=pointer]: "4"
+            - button "2026-10-05" [ref=e46] [cursor=pointer]: "5"
+            - button "2026-10-06" [ref=e47] [cursor=pointer]: "6"
+            - button "2026-10-07" [ref=e48] [cursor=pointer]: "7"
+            - button "2026-10-08" [ref=e49] [cursor=pointer]: "8"
+            - button "2026-10-09" [ref=e50] [cursor=pointer]: "9"
+            - button "2026-10-10" [ref=e51] [cursor=pointer]: "10"
+            - button "2026-10-11" [ref=e52] [cursor=pointer]: "11"
+            - button "2026-10-12" [ref=e53] [cursor=pointer]: "12"
+            - button "2026-10-13" [ref=e54] [cursor=pointer]: "13"
+            - button "2026-10-14" [ref=e55] [cursor=pointer]: "14"
+            - button "2026-10-15" [ref=e56] [cursor=pointer]: "15"
+            - button "2026-10-16" [ref=e57] [cursor=pointer]: "16"
+            - button "2026-10-17" [ref=e58] [cursor=pointer]: "17"
+            - button "2026-10-18" [ref=e59] [cursor=pointer]: "18"
+            - button "2026-10-19" [ref=e60] [cursor=pointer]: "19"
+            - button "2026-10-20, 일정 있음" [ref=e61] [cursor=pointer]: "20"
+            - button "2026-10-21" [ref=e62] [cursor=pointer]: "21"
+            - button "2026-10-22, 일정 있음" [ref=e63] [cursor=pointer]: "22"
+            - button "2026-10-23" [ref=e64] [cursor=pointer]: "23"
+            - button "2026-10-24" [ref=e65] [cursor=pointer]: "24"
+            - button "2026-10-25" [ref=e66] [cursor=pointer]: "25"
+            - button "2026-10-26, 일정 있음" [ref=e67] [cursor=pointer]: "26"
+            - button "2026-10-27" [ref=e68] [cursor=pointer]: "27"
+            - button "2026-10-28" [ref=e69] [cursor=pointer]: "28"
+            - button "2026-10-29" [ref=e70] [cursor=pointer]: "29"
+            - button "2026-10-30" [ref=e71] [cursor=pointer]: "30"
+            - button "2026-10-31" [ref=e72] [cursor=pointer]: "31"
+            - button "2026-11-01" [ref=e73] [cursor=pointer]: "1"
+            - button "2026-11-02" [ref=e74] [cursor=pointer]: "2"
+            - button "2026-11-03" [ref=e75] [cursor=pointer]: "3"
+            - button "2026-11-04" [ref=e76] [cursor=pointer]: "4"
+            - button "2026-11-05" [ref=e77] [cursor=pointer]: "5"
+            - button "2026-11-06" [ref=e78] [cursor=pointer]: "6"
+            - button "2026-11-07" [ref=e79] [cursor=pointer]: "7"
+            - button "2026-11-08" [ref=e80] [cursor=pointer]: "8"
+          - separator [ref=e81]
+          - generic [ref=e82]:
+            - generic [ref=e83]: 이번 달 공지
+            - button "+ 일정 추가" [ref=e84] [cursor=pointer]
+          - button "10월 20일 과학 준비물 가져오기 돋보기와 관찰 노트를 챙겨 와요. 3/6명 확인" [ref=e85] [cursor=pointer]:
+            - generic [ref=e86]: 10월 20일
+            - generic [ref=e88]: 과학 준비물 가져오기
+            - generic [ref=e89]: 돋보기와 관찰 노트를 챙겨 와요.
+            - generic [ref=e90]: 3/6명 확인
+          - button "10월 22일 책 읽는 날 함께 읽고 싶은 책 한 권을 가져와요. 3/6명 확인" [ref=e91] [cursor=pointer]:
+            - generic [ref=e92]: 10월 22일
+            - generic [ref=e94]: 책 읽는 날
+            - generic [ref=e95]: 함께 읽고 싶은 책 한 권을 가져와요.
+            - generic [ref=e96]: 3/6명 확인
+          - button "10월 26일 학급 발표회 모둠별 발표 순서를 확인해 주세요. 2/6명 확인" [ref=e97] [cursor=pointer]:
+            - generic [ref=e98]: 10월 26일
+            - generic [ref=e100]: 학급 발표회
+            - generic [ref=e101]: 모둠별 발표 순서를 확인해 주세요.
+            - generic [ref=e102]: 2/6명 확인
+      - generic [ref=e103]:
+        - generic [ref=e104]:
+          - generic [ref=e105]:
+            - button "대화 목록으로" [ref=e106] [cursor=pointer]:
+              - img [ref=e107]
+            - generic [ref=e110]: 김
+            - generic [ref=e111]:
+              - generic [ref=e112]: 김하늘
+              - generic [ref=e113]: 학생과 주고받은 대화
+          - button "캘린더 보기" [ref=e115] [cursor=pointer]:
+            - img [ref=e116]
+        - generic [ref=e119]:
+          - generic [ref=e120]: 오늘
+          - generic [ref=e121]:
+            - img [ref=e122]
+            - strong [ref=e125]: 대화 기록 안내
+            - text: · 학생과 나눈 대화는 기록되어 언제든 확인할 수 있어요.
+          - generic [ref=e127]:
+            - generic [ref=e128]: 하늘아, 오늘 발표 준비하느라 수고했어요! 궁금한 점 있으면 편하게 남겨 주세요.
+            - generic [ref=e129]:
+              - text: 오전 9:18
+              - generic [ref=e130]: ✓✓
+          - generic [ref=e132]:
+            - generic [ref=e133]: 감사합니다 선생님! 그림 자료는 내일 가져가도 될까요?
+            - generic [ref=e134]: 오전 9:26
+          - generic [ref=e136]:
+            - generic [ref=e137]: 네, 내일까지 준비하면 충분해요. 친구들과 역할도 나눠 보세요 :)
+            - generic [ref=e138]:
+              - text: 오전 9:30
+              - generic [ref=e139]: ✓✓
+        - generic [ref=e140]:
+          - generic [ref=e141]:
+            - textbox "메시지 입력" [ref=e142]:
+              - /placeholder: 김하늘에게 메시지 보내기
+            - button "메시지 보내기" [ref=e143] [cursor=pointer]:
+              - img [ref=e144]
+          - generic [ref=e146]: Enter로 전송 · 이 대화는 기록됩니다
+  - status
