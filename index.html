@@ -31,6 +31,7 @@
 </style>
 <style>
 .feedback-attachment{display:flex;align-items:flex-start;gap:9px;padding:9px 10px;border:1px solid #eee5c5;border-radius:9px;background:#fffdf5;margin-bottom:8px}.feedback-attachment-icon{width:28px;height:28px;flex:none;display:grid;place-items:center;border-radius:7px;background:#fff1b8;color:#826e2d}.feedback-attachment-icon svg{width:15px;height:15px}.feedback-attachment-copy{min-width:0;flex:1}.feedback-attachment-label{display:block;font-size:9px;font-weight:700;color:#8e8152}.feedback-attachment-text{display:block;margin-top:3px;color:#4d574f;font-size:11px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}.feedback-compose .feedback-attachment{margin:0 0 9px}.feedback-highlight.student-highlight{background:#d8f090}.feedback-entry.student-feedback>.feedback-attachment,.feedback-compose.student-feedback>.feedback-attachment,.feedback-subthread.student-feedback>.feedback-attachment{background:#d8f090}.feedback-entry.feedback-followup{margin-left:18px;border-left:3px solid #d8f090}
+.reply-quote-preview:not([hidden]){display:flex;align-items:flex-start;gap:8px;margin:0 0 9px}.reply-quote-preview>.feedback-attachment{flex:1;margin:0}.reply-quote-preview.student-feedback>.feedback-attachment{background:#d8f090}.reply-quote-clear{width:30px;height:30px;border:0;border-radius:8px;background:#f0f2ed;color:#737d74;font-size:17px;line-height:1}.message-reply-reference{margin:0 0 7px;padding:7px 10px;border-left:3px solid #e6d268;border-radius:7px;background:#fff9dc;color:#536052;font-size:10px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}.message-reply-reference.student-reference{border-left-color:#d8f090;background:#f2f8e6}.message-reply-label{display:block;margin-bottom:2px;color:#8b814f;font-size:9px;font-weight:800}.message-reply-reference.student-reference .message-reply-label{color:#638243}.pending-highlight{outline:1px solid rgba(116,133,74,.18)}
 </style>
 <style>
 .feedback-comment{padding:7px 9px;border-radius:8px;background:#fafbf8}.feedback-comment-text{font-size:11px;line-height:1.6;color:#465149;white-space:pre-wrap;overflow-wrap:anywhere}.feedback-comment-text[data-feedback-target="true"]{cursor:text}.feedback-subthread{margin:8px 0 2px 7px;padding-left:9px;border-left:2px solid #e6d268}.feedback-subthread>.feedback-attachment{background:#fffdf5}
@@ -58,7 +59,7 @@
           <div class="chat-tools"><button class="tool-button" id="calendarHeader" title="캘린더 보기" aria-label="캘린더 보기"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></button><button class="tool-button optional" id="groupHeader" title="모둠 편성" aria-label="모둠 편성"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M9.5 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 8v6M23 11h-6"/></svg></button><button class="tool-button optional" id="historyButton" title="대화 기록 안내" aria-label="대화 기록 안내"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></button></div>
         </header>
         <div class="messages" id="messages" aria-live="polite"></div>
-        <div class="composer-wrap" id="composerWrap"><div class="format-toolbar" id="formatToolbar" role="toolbar" aria-label="메시지 서식"><button type="button" data-format="bold" aria-label="굵게" title="굵게"><strong>B</strong></button><button type="button" data-format="italic" aria-label="기울임꼴" title="기울임꼴"><em>I</em></button><button type="button" data-format="underline" aria-label="밑줄" title="밑줄"><u>U</u></button><span class="format-divider"></span><button type="button" data-format="unorderedList" aria-label="글머리 기호" title="글머리 기호"><svg viewBox="0 0 24 24"><path d="M9 6h12M9 12h12M9 18h12"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg></button><button type="button" data-format="orderedList" aria-label="숫자 목록" title="숫자 목록">1.</button><button type="button" data-format="checklist" aria-label="체크박스" title="체크박스"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><path d="m4.5 6.5 1.5 1.5 3-3M14 6h7M3 16h7M14 16h7"/><rect x="3" y="13" width="7" height="7" rx="1"/></svg></button></div><form class="composer" id="messageForm"><div id="messageInput" class="rich-editor" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="메시지를 입력하세요" aria-label="메시지 입력"></div><button class="send-button" aria-label="메시지 보내기" type="submit"><svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4 20-7ZM22 2 11 13"/></svg></button></form><div class="compose-hint" id="composeHint">Enter로 전송 · Shift + Enter로 줄 바꿈</div></div>
+        <div class="composer-wrap" id="composerWrap"><div id="replyQuotePreview" class="reply-quote-preview" hidden></div><div class="format-toolbar" id="formatToolbar" role="toolbar" aria-label="메시지 서식"><button type="button" data-format="bold" aria-label="굵게" title="굵게"><strong>B</strong></button><button type="button" data-format="italic" aria-label="기울임꼴" title="기울임꼴"><em>I</em></button><button type="button" data-format="underline" aria-label="밑줄" title="밑줄"><u>U</u></button><span class="format-divider"></span><button type="button" data-format="unorderedList" aria-label="글머리 기호" title="글머리 기호"><svg viewBox="0 0 24 24"><path d="M9 6h12M9 12h12M9 18h12"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg></button><button type="button" data-format="orderedList" aria-label="숫자 목록" title="숫자 목록">1.</button><button type="button" data-format="checklist" aria-label="체크박스" title="체크박스"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><path d="m4.5 6.5 1.5 1.5 3-3M14 6h7M3 16h7M14 16h7"/><rect x="3" y="13" width="7" height="7" rx="1"/></svg></button></div><form class="composer" id="messageForm"><div id="messageInput" class="rich-editor" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="메시지를 입력하세요" aria-label="메시지 입력"></div><button class="send-button" aria-label="메시지 보내기" type="submit"><svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4 20-7ZM22 2 11 13"/></svg></button></form><div class="compose-hint" id="composeHint">Enter로 전송 · Shift + Enter로 줄 바꿈</div></div>
       </div>
     </section>
   </div>
@@ -100,6 +101,7 @@ const initialData = {
 let data;
 let openThread=null;
 let openAnnouncementId=null;
+let replyQuote=null;
 let pendingFeedback=null;
 let replyingTo=null;
 let sidebarMode='chats';
@@ -134,7 +136,7 @@ function getChatThreads(id){if(!data.chatThreads[id])data.chatThreads[id]=[{id:`
 function getLatestThread(id){return [...getChatThreads(id)].sort((a,b)=>(b.updatedAt||b.createdAt||0)-(a.updatedAt||a.createdAt||0))[0]}
 function getLast(id){const thread=getLatestThread(id),message=thread?.messages?.at(-1);return message?.text||(thread?`새 대화: ${thread.title}`:'새로운 대화를 시작해 보세요')}
 function getTime(id){const thread=getLatestThread(id);return thread?.messages?.at(-1)?.time||''}
-function setRole(role){data.role=role;openThread=null;openAnnouncementId=null;pendingFeedback=null;replyingTo=null;if(role==='student'){data.studentId=currentStudentId();data.studentName=student(data.studentId)?.name||data.studentName;data.selectedId='teacher'}else if(data.selectedId==='teacher'||selectedPeerChat(data.selectedId))data.selectedId=data.students[0]?.id||'';save();render()}
+function setRole(role){data.role=role;openThread=null;openAnnouncementId=null;replyQuote=null;pendingFeedback=null;replyingTo=null;if(role==='student'){data.studentId=currentStudentId();data.studentName=student(data.studentId)?.name||data.studentName;data.selectedId='teacher'}else if(data.selectedId==='teacher'||selectedPeerChat(data.selectedId))data.selectedId=data.students[0]?.id||'';save();render()}
 function render(){
   const teacher=data.role==='teacher';
   $('#teacherRole').classList.toggle('active',teacher);$('#studentRole').classList.toggle('active',!teacher);
@@ -163,7 +165,7 @@ function renderContacts(){
   const renderRows=rows=>rows.length?rows.map(row=>`<button class="contact ${data.selectedId===row.id?'active':''}" data-contact="${esc(row.id)}" type="button">${row.avatar}<span class="contact-copy"><span class="contact-name">${esc(row.name)}${row.tag?`<span class="group-tag">${row.tag}</span>`:''}</span><span class="contact-preview">${esc(row.preview)}</span></span>${data.unread?.[row.id]?`<span class="unread">${data.unread[row.id]}</span>`:`<span class="contact-time">${esc(getTime(row.id))}</span>`}</button>`).join(''):'<div class="empty-state">아직 대화가 없어요.</div>';
   const section=(title,rows,pinned=false)=>`<section class="contact-section${pinned?' pinned':''}"><div class="contact-section-title">${title}<span class="section-count">${rows.length}</span></div>${renderRows(rows)}</section>`;
   $('#contactList').innerHTML=teacher?`${section('학생 대화',peopleRows)}${section('모둠 대화',groupRows)}`:`${section('모둠 대화',groupRows,true)}${section('선생님 대화',peopleRows)}`;
-  $('#contactList').querySelectorAll('[data-contact]').forEach(btn=>btn.addEventListener('click',()=>{sidebarMode='chats';data.selectedId=btn.dataset.contact;openThread=null;openAnnouncementId=null;pendingFeedback=null;replyingTo=null;delete data.unread[data.selectedId];save();$('#shell').classList.add('chat-open');render()}));
+  $('#contactList').querySelectorAll('[data-contact]').forEach(btn=>btn.addEventListener('click',()=>{sidebarMode='chats';data.selectedId=btn.dataset.contact;openThread=null;openAnnouncementId=null;replyQuote=null;pendingFeedback=null;replyingTo=null;delete data.unread[data.selectedId];save();$('#shell').classList.add('chat-open');render()}));
 }
 function renderAnnouncementList(){
   $('#listLabel').textContent='공지사항';
@@ -181,8 +183,8 @@ function renderStudentInbox(){
   const noAnnouncements='<div class="inbox-empty">새 공지사항이 없어요.</div>',noTeacherThreads='<div class="inbox-empty">선생님과 나눈 대화가 없어요.</div>',noGroupThreads='<div class="inbox-empty">모둠 대화가 아직 없어요.</div>';
   const groupActions=groups.map(g=>`<div class="inbox-group-block"><div class="inbox-group-name">${esc(g.name)} <button class="inbox-new-button" data-new-group-thread="${esc(g.id)}" type="button">+ 새 대화</button></div>${groupThreads.filter(item=>item.group.id===g.id).map(({thread})=>{const index=groupThreads.findIndex(item=>item.thread.id===thread.id&&item.group.id===g.id);return `<button class="thread-card inbox-card" data-inbox-chat="${esc(g.id)}" data-inbox-thread="${esc(thread.id)}" type="button"><span class="thread-card-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M9.5 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 8v6M23 11h-6"/></svg></span><span class="thread-card-copy"><span class="thread-card-title">모둠 대화 ${index+1}</span><span class="thread-card-preview">${esc(thread.messages?.at(-1)?.text||thread.title)}</span><span class="thread-card-meta">${esc(g.name)} · 메시지 ${thread.messages?.length||0}개</span></span><svg class="thread-card-arrow" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>`}).join('')||noGroupThreads}</div>`).join('');
   $('#messages').innerHTML=`<div class="student-inbox"><div class="inbox-intro"><p class="eyebrow">CLASS INBOX</p><h2>대화 목록</h2><p>공지사항과 선생님·모둠 대화를 한곳에서 확인하세요.</p></div><section class="inbox-section"><div class="inbox-section-head"><h3>공지사항</h3></div><div class="thread-card-list">${noticeCards||noAnnouncements}</div></section><section class="inbox-section"><div class="inbox-section-head"><h3>선생님과 대화</h3><button id="inboxNewPrivate" type="button">+ 새 대화</button></div><div class="thread-card-list">${teacherCards||noTeacherThreads}</div></section><section class="inbox-section"><div class="inbox-section-head"><h3>모둠 대화</h3></div>${groupActions||noGroupThreads}</section></div>`;
-  $('#messages').querySelectorAll('[data-inbox-announcement]').forEach(button=>button.addEventListener('click',()=>{openAnnouncementId=button.dataset.inboxAnnouncement;openThread=null;pendingFeedback=null;replyingTo=null;renderChat()}));
-  $('#messages').querySelectorAll('[data-inbox-chat]').forEach(button=>button.addEventListener('click',()=>{data.selectedId=button.dataset.inboxChat;openAnnouncementId=null;pendingFeedback=null;replyingTo=null;openThread={chatId:data.selectedId,threadId:button.dataset.inboxThread};render()}));
+  $('#messages').querySelectorAll('[data-inbox-announcement]').forEach(button=>button.addEventListener('click',()=>{openAnnouncementId=button.dataset.inboxAnnouncement;openThread=null;replyQuote=null;pendingFeedback=null;replyingTo=null;renderChat()}));
+  $('#messages').querySelectorAll('[data-inbox-chat]').forEach(button=>button.addEventListener('click',()=>{data.selectedId=button.dataset.inboxChat;openAnnouncementId=null;replyQuote=null;pendingFeedback=null;replyingTo=null;openThread={chatId:data.selectedId,threadId:button.dataset.inboxThread};render()}));
   $('#inboxNewPrivate').addEventListener('click',()=>{data.selectedId='teacher';openAnnouncementId=null;openNewPrivateThread()});
   $('#messages').querySelectorAll('[data-new-group-thread]').forEach(button=>button.addEventListener('click',()=>{data.selectedId=button.dataset.newGroupThread;openAnnouncementId=null;openNewGroupThread()}));
 }
@@ -211,14 +213,15 @@ function renderChat(){
     const cards=sortedThreads.map(thread=>{const latest=thread.messages?.at(-1),preview=latest?.text||'아직 대화가 없어요. 눌러서 대화를 시작해 보세요.';return `<button class="thread-card" data-open-thread="${esc(thread.id)}" type="button"><span class="thread-card-icon"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H6l-3 2v-6a7.5 7.5 0 1 1 17-3.5Z"/><path d="M8 10h8M8 14h5"/></svg></span><span class="thread-card-copy"><span class="thread-card-title">${esc(thread.title)}</span><span class="thread-card-preview">${esc(preview)}</span><span class="thread-card-meta">메시지 ${thread.messages?.length||0}개${latest?.time?` · 최근 ${esc(latest.time)}`:''}</span></span><svg class="thread-card-arrow" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>`}).join('');
     const createButton=isGroup(id)?(data.role==='student'?'<button class="thread-new-button" id="newGroupThread" type="button">+ 새 대화</button>':''):'<button class="thread-new-button" id="newPrivateThread" type="button">+ 새 대화</button>';
     $('#messages').innerHTML=`<div class="thread-list-view"><div class="thread-list-heading"><p class="eyebrow">${isGroup(id)?'GROUP THREAD':'MESSAGE THREAD'}</p><div class="thread-heading-row"><h2>대화 스레드</h2>${createButton}</div><p>목록을 선택하면 실제 대화 내용을 볼 수 있어요.</p></div><div class="thread-card-list">${cards}</div></div>`;
-    $('#messages').querySelectorAll('[data-open-thread]').forEach(button=>button.addEventListener('click',()=>{pendingFeedback=null;replyingTo=null;openThread={chatId:id,threadId:button.dataset.openThread};renderChat()}));
+    $('#messages').querySelectorAll('[data-open-thread]').forEach(button=>button.addEventListener('click',()=>{replyQuote=null;pendingFeedback=null;replyingTo=null;openThread={chatId:id,threadId:button.dataset.openThread};renderChat()}));
     $('#newGroupThread')?.addEventListener('click',openNewGroupThread);
     $('#newPrivateThread')?.addEventListener('click',openNewPrivateThread);
   }
-  $('#threadListBack').style.display=threadOpen||announcementOpen?'grid':'none';$('#composerWrap').style.display=threadOpen?'':'none';
+  if(replyQuote&&(!threadOpen||replyQuote.chatId!==chatId||replyQuote.threadId!==activeThread?.id)){clearPendingReplyHighlight();replyQuote=null}
+  $('#threadListBack').style.display=threadOpen||announcementOpen?'grid':'none';$('#composerWrap').style.display=threadOpen?'':'none';renderReplyQuotePreview();
   $('#messages').scrollTop=$('#messages').scrollHeight;
   $('#messageInput').dataset.placeholder=isGroup(id)?`${title} 친구들에게 메시지 보내기`:`${title}에게 메시지 보내기`;
-  $('#composeHint').textContent=teacher?'Enter로 전송 · 서식 버튼으로 메시지를 꾸밀 수 있어요':'Enter로 전송 · 선생님이 대화를 확인할 수 있어요';
+  $('#composeHint').textContent=teacher?'Enter로 전송 · 문장을 드래그해 인용 답장 · 서식 사용 가능':'Enter로 전송 · 교사 문장을 드래그해 인용 질문 · 서식 사용 가능';
   $('#historyButton').title=teacher?'학생과 나눈 대화는 기록되어 확인할 수 있어요':'선생님은 이 대화 내용을 확인할 수 있어요';
 }
 function sanitizeRichHtml(source){
@@ -251,16 +254,29 @@ function renderFeedbackComments(annotation,messageId,parentCommentId='',parentAn
   return `${comments}<div class="feedback-entry-actions"><button class="feedback-reply-button" data-feedback-reply="${esc(annotation.id)}" data-message="${esc(messageId)}" data-parent-comment="${esc(parentCommentId)}" data-parent-annotation="${esc(parentAnnotationId)}" type="button">추가 질문 / 답글</button></div>${open?`<form class="feedback-compose" data-feedback-reply-form="${esc(annotation.id)}" data-message="${esc(messageId)}" data-parent-comment="${esc(parentCommentId)}" data-parent-annotation="${esc(parentAnnotationId)}"><p class="feedback-compose-hint">선택 문장에 이어서 답글을 남겨요</p>${renderQuoteAttachment(annotation.quote,'답글 대상 문장')}<textarea name="comment" required maxlength="500" placeholder="추가 질문이나 답글을 입력해 주세요."></textarea><div class="feedback-compose-actions"><button type="button" data-feedback-cancel>취소</button><button class="primary" type="submit">답글 등록</button></div></form>`:''}`;
 }
 function renderFeedback(message){
-  const annotations=message.annotations||[];if(!annotations.length)return '';
-  const renderEntry=(annotation,parentCommentId='',parentAnnotationId='')=>{const descendants=(annotation.comments||[]).flatMap(comment=>(comment.annotations||[]).map(child=>renderEntry(child,comment.id,annotation.id))).join('');return `<article class="feedback-entry ${annotation.authorRole==='student'?'student-feedback':''} ${parentCommentId?'feedback-followup':''}" style="--feedback-depth:${parentCommentId?1:0}">${renderQuoteAttachment(annotation.quote,'드래그한 대화 문장')}${renderFeedbackComments(annotation,message.id,parentCommentId,parentAnnotationId)}</article>${descendants}`};
+  const annotations=(message.annotations||[]).filter(annotation=>!annotation.highlightOnly||annotation.comments?.length);if(!annotations.length)return '';
+  const renderEntry=(annotation,parentCommentId='',parentAnnotationId='')=>{const descendants=(annotation.comments||[]).flatMap(comment=>(comment.annotations||[]).filter(child=>!child.highlightOnly||child.comments?.length).map(child=>renderEntry(child,comment.id,annotation.id))).join('');return `<article class="feedback-entry ${annotation.authorRole==='student'?'student-feedback':''} ${parentCommentId?'feedback-followup':''}" style="--feedback-depth:${parentCommentId?1:0}">${renderQuoteAttachment(annotation.quote,'드래그한 대화 문장')}${renderFeedbackComments(annotation,message.id,parentCommentId,parentAnnotationId)}</article>${descendants}`};
   return `<div class="feedback-thread">${annotations.map(annotation=>renderEntry(annotation)).join('')}</div>`;
 }
+function renderMessageReplyQuote(reply){return `<div class="message-reply-reference ${reply.authorRole==='student'?'student-reference':''}"><span class="message-reply-label">인용한 문장</span>${esc(reply.quote)}</div>`}
 function renderMessage(m,teacher,participantId,chatId,threadId){
   const mine=teacher?m.from==='teacher':(m.from==='student'||m.from===currentStudentId()||m.from==='me');
   const feedbackTarget=teacher?m.from!=='teacher':m.from==='teacher';
   let sender='';if(isGroup(participantId)&&!mine)sender=m.from==='teacher'?'박서연 선생님':(student(m.from)?.name||data.peerNames[participantId]||'친구');
   const color=student(m.from)?.color||1;
-  return `<div class="message-row ${mine?'mine':''} ${feedbackTarget?'feedback-target':''}" data-message-id="${esc(m.id)}" data-chat-id="${esc(chatId)}" data-thread-id="${esc(threadId)}">${!mine&&isGroup(participantId)?avatar(sender,color,'small'):''}<div class="bubble-wrap">${sender?`<div class="sender">${esc(sender)}</div>`:''}<div class="bubble message-text" data-feedback-target="${feedbackTarget?'true':'false'}">${renderMessageText(m)}</div>${renderFeedback(m)}<div class="message-meta">${esc(m.time||'방금')} ${mine&&teacher?'<span class="read-mark">✓✓</span>':''}</div></div></div>`;
+  return `<div class="message-row ${mine?'mine':''} ${feedbackTarget?'feedback-target':''}" data-message-id="${esc(m.id)}" data-chat-id="${esc(chatId)}" data-thread-id="${esc(threadId)}">${!mine&&isGroup(participantId)?avatar(sender,color,'small'):''}<div class="bubble-wrap">${sender?`<div class="sender">${esc(sender)}</div>`:''}${m.replyTo?renderMessageReplyQuote(m.replyTo):''}<div class="bubble message-text" data-feedback-target="${feedbackTarget?'true':'false'}">${renderMessageText(m)}</div>${renderFeedback(m)}<div class="message-meta">${esc(m.time||'방금')} ${mine&&teacher?'<span class="read-mark">✓✓</span>':''}</div></div></div>`;
+}
+function renderReplyQuotePreview(){
+  const preview=$('#replyQuotePreview');if(!preview)return;
+  if(!replyQuote){preview.hidden=true;preview.innerHTML='';return}
+  preview.hidden=false;preview.className=`reply-quote-preview ${replyQuote.authorRole==='student'?'student-feedback':''}`;preview.innerHTML=`${renderQuoteAttachment(replyQuote.quote,'답장에 인용할 문장')}<button class="reply-quote-clear" data-clear-reply-quote type="button" aria-label="인용 해제" title="인용 해제">×</button>`;
+}
+function clearPendingReplyHighlight(){document.querySelectorAll('.pending-highlight').forEach(mark=>{const parent=mark.parentNode;if(!parent)return;while(mark.firstChild)parent.insertBefore(mark.firstChild,mark);mark.remove();parent.normalize()})}
+function clearReplyQuote(){clearPendingReplyHighlight();replyQuote=null;renderReplyQuotePreview()}
+function storeReplyHighlight(quote){
+  const message=locateFeedbackMessage(quote.chatId,quote.threadId,quote.messageId);if(!message)return;
+  const annotation={id:`feedback-${Date.now()}`,start:quote.start,end:quote.end,quote:quote.quote,authorRole:quote.authorRole,highlightOnly:true,comments:[]};
+  if(quote.commentId){const comment=locateFeedbackComment(quote.chatId,quote.threadId,quote.messageId,quote.parentAnnotationId,quote.commentId);if(!comment)return;comment.annotations ||= [];comment.annotations.push(annotation)}else{message.annotations ||= [];message.annotations.push(annotation)}
 }
 function handleMessageSelection(){
   const selection=window.getSelection();if(!selection||selection.isCollapsed||!openThread)return;
@@ -271,11 +287,8 @@ function handleMessageSelection(){
   let start=offsetAt(range.startContainer,range.startOffset),end=offsetAt(range.endContainer,range.endOffset);const text=startElement.textContent,raw=text.slice(start,end),leading=raw.length-raw.trimStart().length,trailing=raw.length-raw.trimEnd().length;start+=leading;end-=trailing;
   const quote=text.slice(start,end);if(!quote.trim())return;
   const selectedComment=startElement.matches('.feedback-comment-text')?startElement.closest('[data-feedback-comment-id]'):null;
-  pendingFeedback={kind:selectedComment?'comment':'message',chatId:row.dataset.chatId,threadId:row.dataset.threadId,messageId:row.dataset.messageId,parentAnnotationId:selectedComment?.dataset.parentAnnotationId||'',commentId:selectedComment?.dataset.feedbackCommentId||'',start,end,quote};replyingTo=null;document.querySelectorAll('.feedback-compose[data-feedback-compose]').forEach(form=>form.remove());
-  const colorClass=data.role==='teacher'?'teacher-feedback':'student-feedback';
-  const insertionPoint=selectedComment||row;
-  insertionPoint.insertAdjacentHTML('afterend',`<form class="feedback-compose ${colorClass}" data-feedback-compose><p class="feedback-compose-hint">선택한 문장에 질문이나 피드백을 남겨요</p>${renderQuoteAttachment(quote,'드래그한 문장')}<textarea name="comment" required maxlength="500" placeholder="${data.role==='teacher'?'학생에게 전할 피드백을 적어 주세요.':'교사에게 추가 질문을 남겨 보세요.'}"></textarea><div class="feedback-compose-actions"><button type="button" data-feedback-cancel>취소</button><button class="primary" type="submit">댓글 남기기</button></div></form>`);
-  selection.removeAllRanges();insertionPoint.nextElementSibling.querySelector('textarea').focus();
+  clearPendingReplyHighlight();replyQuote={chatId:row.dataset.chatId,threadId:row.dataset.threadId,messageId:row.dataset.messageId,parentAnnotationId:selectedComment?.dataset.parentAnnotationId||'',commentId:selectedComment?.dataset.feedbackCommentId||'',start,end,quote,authorRole:data.role};
+  wrapTextRange(startElement,start,end,`${data.role==='teacher'?'teacher-highlight':'student-highlight'} pending-highlight`,'pending');renderReplyQuotePreview();selection.removeAllRanges();$('#messageInput').focus();
 }
 function locateFeedbackMessage(chatId,threadId,messageId){const thread=getChatThreads(chatId).find(item=>item.id===threadId);return thread?.messages?.find(message=>message.id===messageId)}
 function locateFeedbackComment(chatId,threadId,messageId,parentAnnotationId,commentId){const message=locateFeedbackMessage(chatId,threadId,messageId),annotation=findFeedbackAnnotation(message?.annotations,parentAnnotationId);return annotation?.comments?.find(comment=>comment.id===commentId)}
@@ -328,9 +341,10 @@ function toggleCalendar(){const drawer=$('#calendarDrawer'),shell=$('#shell');if
 function sendMessage(text,html=''){
   const id=data.selectedId,teacher=data.role==='teacher';const chatId=teacher?id:(isGroup(id)?id:(id==='teacher'?currentStudentId():id));
   if(!text.trim())return;const thread=openThread?.chatId===id?getChatThreads(chatId).find(item=>item.id===openThread.threadId):null;if(!thread){notify('먼저 대화 스레드를 열어 주세요.');return}
-  thread.messages ||= [];thread.messages.push({id:`message-${Date.now()}`,from:teacher?'teacher':currentStudentId(),text,html,time:new Intl.DateTimeFormat('ko-KR',{hour:'numeric',minute:'2-digit'}).format(new Date()),annotations:[]});thread.updatedAt=Date.now();
+  const quoted=replyQuote?.chatId===chatId&&replyQuote.threadId===thread.id?{...replyQuote}:null;if(quoted)storeReplyHighlight(quoted);
+  thread.messages ||= [];thread.messages.push({id:`message-${Date.now()}`,from:teacher?'teacher':currentStudentId(),text,html,replyTo:quoted?{quote:quoted.quote,authorRole:quoted.authorRole}:null,time:new Intl.DateTimeFormat('ko-KR',{hour:'numeric',minute:'2-digit'}).format(new Date()),annotations:[]});thread.updatedAt=Date.now();
   if(teacher&&!isGroup(id))data.unread[id]=(data.unread[id]||0)+1;
-  $('#messageInput').innerHTML='';save();render();$('#messageInput').focus();notify(teacher?'메시지를 보냈어요.':'메시지를 보냈어요.');
+  $('#messageInput').innerHTML='';replyQuote=null;clearPendingReplyHighlight();save();render();$('#messageInput').focus();notify(teacher?'메시지를 보냈어요.':'메시지를 보냈어요.');
 }
 function applyMessageFormat(format){
   const editor=$('#messageInput');editor.focus();
@@ -350,13 +364,13 @@ function openNewGroupThread(){
   const chatId=data.selectedId,selectedGroup=group(chatId);
   if(data.role!=='student'||!selectedGroup||!studentCanOpenConversation(chatId))return;
   const threadId=`thread-${Date.now()}`,now=Date.now(),thread={id:threadId,title:nextNewThreadTitle(chatId),messages:[],createdAt:now,updatedAt:now};
-  getChatThreads(chatId).push(thread);openThread={chatId,threadId};pendingFeedback=null;replyingTo=null;save();render();$('#messageInput').focus();notify(`${selectedGroup.name} 새 대화를 시작했어요.`);
+  getChatThreads(chatId).push(thread);openThread={chatId,threadId};replyQuote=null;pendingFeedback=null;replyingTo=null;save();render();$('#messageInput').focus();notify(`${selectedGroup.name} 새 대화를 시작했어요.`);
 }
 function openNewPrivateThread(){
   const selectedId=data.selectedId,teacher=data.role==='teacher';
   if(isGroup(selectedId)||(!teacher&&selectedId!=='teacher'))return;
   const chatId=teacher?selectedId:currentStudentId(),threadId=`thread-${Date.now()}`,now=Date.now(),thread={id:threadId,title:nextNewThreadTitle(chatId),messages:[],createdAt:now,updatedAt:now};
-  getChatThreads(chatId).push(thread);openThread={chatId:selectedId,threadId};pendingFeedback=null;replyingTo=null;save();render();$('#messageInput').focus();notify(`${teacher?(student(selectedId)?.name||'학생'):'선생님'}과 새 대화를 시작했어요.`);
+  getChatThreads(chatId).push(thread);openThread={chatId:selectedId,threadId};replyQuote=null;pendingFeedback=null;replyingTo=null;save();render();$('#messageInput').focus();notify(`${teacher?(student(selectedId)?.name||'학생'):'선생님'}과 새 대화를 시작했어요.`);
 }
 function nextNewThreadTitle(chatId){const count=getChatThreads(chatId).filter(thread=>thread.title.startsWith('새 대화')).length;return `새 대화 ${count+1}`}
 function openEventModal(){
@@ -378,7 +392,7 @@ function openAnnouncementDetail(id){
 $('#teacherRole').addEventListener('click',()=>setRole('teacher'));$('#studentRole').addEventListener('click',()=>setRole('student'));
 $('#classPicker').addEventListener('change',e=>{const next=e.target.value;data.classrooms[data.className]={students:data.students,groups:data.groups,studentId:data.studentId,studentName:data.studentName};const room=data.classrooms[next]||classPresets[next];data.className=next;data.students=room.students;data.groups=room.groups;data.studentId=room.studentId||room.students[0]?.id||'';data.studentName=room.studentName||student(data.studentId)?.name||data.studentName;data.selectedId=data.students[0]?.id||'';save();render();notify(`${data.className} 학생 목록을 불러왔어요.`)});
 $('#calendarToggle').addEventListener('click',toggleCalendar);$('#calendarHeader').addEventListener('click',toggleCalendar);
-$('#announcementNav').addEventListener('click',()=>{sidebarMode='announcements';openThread=null;openAnnouncementId=null;$('#calendarDrawer').classList.remove('open');$('#calendarToggle').classList.remove('selected');render()});
+$('#announcementNav').addEventListener('click',()=>{sidebarMode='announcements';openThread=null;openAnnouncementId=null;replyQuote=null;pendingFeedback=null;$('#calendarDrawer').classList.remove('open');$('#calendarToggle').classList.remove('selected');render()});
 $('#addAnnouncementButton').addEventListener('click',openAnnouncementModal);
 $('#addGroupButton').addEventListener('click',openGroupModal);$('#groupCreateShortcut').addEventListener('click',openGroupModal);$('#groupHeader').addEventListener('click',openGroupModal);
 $('#historyButton').addEventListener('click',()=>notify(data.role==='teacher'?'학생과 주고받은 대화는 이 대화창에 기록돼요.':'선생님은 학생과 주고받은 대화를 확인할 수 있어요.'));
@@ -386,8 +400,8 @@ $('#messageForm').addEventListener('submit',e=>{e.preventDefault();const content
 $('#messageInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('#messageForm').requestSubmit()}else if(e.key==='Enter'&&e.shiftKey){e.preventDefault();document.execCommand('insertHTML',false,'<br><br>')}});
 $('#formatToolbar').addEventListener('mousedown',e=>{if(e.target.closest('button'))e.preventDefault()});$('#formatToolbar').addEventListener('click',e=>{const button=e.target.closest('[data-format]');if(button)applyMessageFormat(button.dataset.format)});
 $('#messages').addEventListener('mouseup',handleMessageSelection);$('#messages').addEventListener('touchend',()=>setTimeout(handleMessageSelection,0));$('#messages').addEventListener('submit',handleFeedbackSubmit);$('#messages').addEventListener('click',handleFeedbackClick);
-$('#modalClose').addEventListener('click',closeModal);$('#modalBackdrop').addEventListener('click',e=>{if(e.target.id==='modalBackdrop')closeModal()});$('#threadListBack').addEventListener('click',()=>{openThread=null;openAnnouncementId=null;pendingFeedback=null;replyingTo=null;renderChat()});$('#mobileBack').addEventListener('click',()=>{openThread=null;openAnnouncementId=null;pendingFeedback=null;replyingTo=null;$('#shell').classList.remove('chat-open')});
-$('#chatNav').addEventListener('click',()=>{sidebarMode='chats';openThread=null;openAnnouncementId=null;if(innerWidth<=720)$('#shell').classList.remove('chat-open');$('#calendarDrawer').classList.remove('open');$('#calendarToggle').classList.remove('selected');render()});
+$('#modalClose').addEventListener('click',closeModal);$('#modalBackdrop').addEventListener('click',e=>{if(e.target.id==='modalBackdrop')closeModal()});$('#replyQuotePreview').addEventListener('click',event=>{if(event.target.closest('[data-clear-reply-quote]'))clearReplyQuote()});$('#threadListBack').addEventListener('click',()=>{openThread=null;openAnnouncementId=null;replyQuote=null;pendingFeedback=null;replyingTo=null;renderChat()});$('#mobileBack').addEventListener('click',()=>{openThread=null;openAnnouncementId=null;replyQuote=null;pendingFeedback=null;replyingTo=null;$('#shell').classList.remove('chat-open')});
+$('#chatNav').addEventListener('click',()=>{sidebarMode='chats';openThread=null;openAnnouncementId=null;replyQuote=null;pendingFeedback=null;if(innerWidth<=720)$('#shell').classList.remove('chat-open');$('#calendarDrawer').classList.remove('open');$('#calendarToggle').classList.remove('selected');render()});
 render();if(innerWidth<=720)$('#shell').classList.add('chat-open');
 </script>
 </body>
