@@ -27,6 +27,7 @@
 .student-inbox{max-width:780px;margin:0 auto;padding:22px 4px 36px}.inbox-intro{margin-bottom:22px}.inbox-intro .eyebrow{margin-bottom:5px}.inbox-intro h2{margin:0;font:800 21px Manrope,'Noto Sans KR',sans-serif;letter-spacing:-.04em}.inbox-intro p{margin:5px 0 0;color:#879188;font-size:12px}.inbox-section{margin-top:22px}.inbox-section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.inbox-section-head h3{margin:0;font-size:13px;font-weight:800}.inbox-section-head button{border:0;background:transparent;color:#517647;font-size:11px;font-weight:700}.inbox-group-block+.inbox-group-block{margin-top:14px}.inbox-group-name{font-size:10px;color:#8a938c;margin-bottom:7px}.inbox-empty{padding:12px;border:1px dashed #e1e7df;border-radius:10px;color:#929b93;font-size:11px}
 .inbox-group-name{display:flex;align-items:center;justify-content:space-between}.inbox-new-button{border:0;background:transparent;color:#517647;font-size:10px;font-weight:700}.inline-deadline{margin-left:7px;vertical-align:2px}.announcement-pane .announcement-detail{white-space:pre-wrap;line-height:1.8;font-size:13px;color:#5d695f}
 .message-text{user-select:text}.message-row.feedback-target .message-text{cursor:text}.feedback-highlight{border-radius:3px;padding:0 1px;box-decoration-break:clone;-webkit-box-decoration-break:clone}.feedback-highlight.teacher-highlight{background:#fff0a6;color:inherit}.feedback-highlight.student-highlight{background:#d8f090;color:inherit}.feedback-thread{margin-top:8px;display:grid;gap:6px}.feedback-entry{border:1px solid #edf0ea;border-radius:10px;background:#fff;padding:9px 10px}.feedback-quote{font-size:10px;color:#647067;border-left:3px solid #e6d268;padding:3px 0 3px 8px;margin-bottom:6px;white-space:pre-wrap}.feedback-entry.student-feedback .feedback-quote{border-left-color:#a8d76d}.feedback-comment{font-size:11px;line-height:1.6;color:#465149;white-space:pre-wrap}.feedback-comment-meta{font-size:9px;color:#929b93;margin-top:4px}.feedback-entry-actions{display:flex;justify-content:flex-end;margin-top:5px}.feedback-reply-button{border:0;background:transparent;color:#5c7e4e;font-size:10px;font-weight:700;padding:4px 6px}.feedback-compose{margin-top:8px;padding:10px;background:#fafbf8;border:1px solid #e7ebe4;border-radius:10px}.feedback-compose blockquote{margin:0 0 8px;padding:6px 9px;border-left:3px solid #e6d268;background:#fff3b8;color:#4f594f;font-size:11px;white-space:pre-wrap}.feedback-compose.student-feedback blockquote{border-left-color:#a8d76d;background:#d8f090}.feedback-compose textarea{display:block;width:100%;min-height:56px;resize:vertical;border:1px solid #e1e6de;border-radius:8px;padding:8px 9px;background:#fff;font-size:12px}.feedback-compose-actions{display:flex;justify-content:flex-end;gap:7px;margin-top:8px}.feedback-compose-actions button{height:32px;padding:0 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:#68736a;font-size:10px}.feedback-compose-actions .primary{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:700}.feedback-compose-hint{font-size:9px;color:#929a93;margin:0 0 6px}
+.format-toolbar{display:flex;align-items:center;gap:4px;padding:0 0 9px}.format-toolbar button{width:34px;height:32px;border:1px solid transparent;border-radius:8px;background:transparent;color:#68746a;display:grid;place-items:center;font-size:12px}.format-toolbar button:hover,.format-toolbar button:focus-visible{background:#f0f4eb;border-color:#e3e9df}.format-toolbar button svg{width:16px;height:16px}.format-divider{height:20px;border-left:1px solid var(--line);margin:0 4px}.composer .rich-editor{flex:1;min-width:0;max-height:120px;overflow:auto;outline:none;padding:10px 0;color:var(--ink);font-size:13px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}.rich-editor:empty:before{content:attr(data-placeholder);color:#a1a8a1;pointer-events:none}.rich-editor ul,.rich-editor ol{margin:3px 0;padding-left:22px}.rich-editor li{padding-left:2px}.message-text ul,.message-text ol{margin:3px 0;padding-left:22px}.message-text li{padding-left:2px}.message-text p,.message-text div{margin:0}.checklist-mark{display:inline-block;margin-right:5px;color:#58744a}
 </style>
 </head>
 <body>
@@ -51,7 +52,7 @@
           <div class="chat-tools"><button class="tool-button" id="calendarHeader" title="캘린더 보기" aria-label="캘린더 보기"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></button><button class="tool-button optional" id="groupHeader" title="모둠 편성" aria-label="모둠 편성"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M9.5 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 8v6M23 11h-6"/></svg></button><button class="tool-button optional" id="historyButton" title="대화 기록 안내" aria-label="대화 기록 안내"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></button></div>
         </header>
         <div class="messages" id="messages" aria-live="polite"></div>
-        <div class="composer-wrap" id="composerWrap"><form class="composer" id="messageForm"><textarea id="messageInput" rows="1" placeholder="메시지를 입력하세요" aria-label="메시지 입력"></textarea><button class="send-button" aria-label="메시지 보내기" type="submit"><svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4 20-7ZM22 2 11 13"/></svg></button></form><div class="compose-hint" id="composeHint">Enter로 전송 · Shift + Enter로 줄 바꿈</div></div>
+        <div class="composer-wrap" id="composerWrap"><div class="format-toolbar" id="formatToolbar" role="toolbar" aria-label="메시지 서식"><button type="button" data-format="bold" aria-label="굵게" title="굵게"><strong>B</strong></button><button type="button" data-format="italic" aria-label="기울임꼴" title="기울임꼴"><em>I</em></button><button type="button" data-format="underline" aria-label="밑줄" title="밑줄"><u>U</u></button><span class="format-divider"></span><button type="button" data-format="unorderedList" aria-label="글머리 기호" title="글머리 기호"><svg viewBox="0 0 24 24"><path d="M9 6h12M9 12h12M9 18h12"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg></button><button type="button" data-format="orderedList" aria-label="숫자 목록" title="숫자 목록">1.</button><button type="button" data-format="checklist" aria-label="체크박스" title="체크박스"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><path d="m4.5 6.5 1.5 1.5 3-3M14 6h7M3 16h7M14 16h7"/><rect x="3" y="13" width="7" height="7" rx="1"/></svg></button></div><form class="composer" id="messageForm"><div id="messageInput" class="rich-editor" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="메시지를 입력하세요" aria-label="메시지 입력"></div><button class="send-button" aria-label="메시지 보내기" type="submit"><svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4 20-7ZM22 2 11 13"/></svg></button></form><div class="compose-hint" id="composeHint">Enter로 전송 · Shift + Enter로 줄 바꿈</div></div>
       </div>
     </section>
   </div>
@@ -191,6 +192,7 @@ function renderChat(){
   if(threadOpen){
     const notice=teacher?'학생과 나눈 대화는 기록되어 언제든 확인할 수 있어요. 문장을 드래그하면 댓글 피드백을 남길 수 있어요.':'안내: 선생님은 학생과 주고받은 대화 내용을 확인할 수 있어요. 선생님의 답변을 드래그해 댓글을 남겨 보세요.';
     $('#messages').innerHTML=`<div class="date-divider">오늘</div><div class="notice">${teacher?'<svg style="width:12px;height:12px;vertical-align:-2px;margin-right:3px" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>':''}<strong>${teacher?'대화 기록 안내':'대화 안내'}</strong> · ${notice}</div>${messages.map(m=>renderMessage(m,teacher,id,chatId,activeThread.id)).join('')||`<div class="empty-state">아직 대화가 없어요.<br>메시지를 보내 대화를 시작해 보세요.</div>`}`;
+    applyMessageHighlights(chatId,activeThread.id);
   }else if(announcementOpen){
     $('#chatTitle').textContent=announcement.title;$('#chatSubtitle').textContent='공지사항';$('#chatAvatar').innerHTML=avatar('공',4);
     const deadline=announcement.deadlineAt?`<span class="announcement-deadline">마감 확인 · ${formatDate(announcement.deadlineAt)}</span>`:'';
@@ -209,16 +211,25 @@ function renderChat(){
   }
   $('#threadListBack').style.display=threadOpen||announcementOpen?'grid':'none';$('#composerWrap').style.display=threadOpen?'':'none';
   $('#messages').scrollTop=$('#messages').scrollHeight;
-  $('#messageInput').placeholder=isGroup(id)?`${title} 친구들에게 메시지 보내기`:`${title}에게 메시지 보내기`;
-  $('#composeHint').textContent=teacher?'Enter로 전송 · 이 대화는 기록됩니다':'Enter로 전송 · 선생님이 대화를 확인할 수 있어요';
+  $('#messageInput').dataset.placeholder=isGroup(id)?`${title} 친구들에게 메시지 보내기`:`${title}에게 메시지 보내기`;
+  $('#composeHint').textContent=teacher?'Enter로 전송 · 서식 버튼으로 메시지를 꾸밀 수 있어요':'Enter로 전송 · 선생님이 대화를 확인할 수 있어요';
   $('#historyButton').title=teacher?'학생과 나눈 대화는 기록되어 확인할 수 있어요':'선생님은 이 대화 내용을 확인할 수 있어요';
 }
-function renderMessageText(message){
-  const text=message.text||'',annotations=(message.annotations||[]).filter(item=>Number.isInteger(item.start)&&Number.isInteger(item.end)&&item.start>=0&&item.end<=text.length&&item.start<item.end);
-  if(!annotations.length)return esc(text);
-  const points=[...new Set([0,text.length,...annotations.flatMap(item=>[item.start,item.end])])].sort((a,b)=>a-b);let html='';
-  for(let i=0;i<points.length-1;i++){const start=points[i],end=points[i+1],segment=esc(text.slice(start,end)),active=annotations.filter(item=>item.start<end&&item.end>start);if(!active.length){html+=segment;continue}const style=active.at(-1).authorRole==='teacher'?'teacher-highlight':'student-highlight';html+=`<span class="feedback-highlight ${style}">${segment}</span>`}
-  return html;
+function sanitizeRichHtml(source){
+  const documentCopy=new DOMParser().parseFromString(String(source||''),'text/html'),allowed=new Set(['strong','b','em','i','u','ul','ol','li','br','div','p']);
+  const clean=node=>{if(node.nodeType===Node.TEXT_NODE)return esc(node.nodeValue);if(node.nodeType!==Node.ELEMENT_NODE)return '';const tag=node.tagName.toLowerCase();if(['script','style','iframe','object'].includes(tag))return '';const children=[...node.childNodes].map(clean).join('');if(!allowed.has(tag))return children;const safeTag=tag==='b'?'strong':tag==='i'?'em':tag;return safeTag==='br'?'<br>':`<${safeTag}>${children}</${safeTag}>`};
+  return [...documentCopy.body.childNodes].map(clean).join('');
+}
+function editorContent(editor){const html=sanitizeRichHtml(editor.innerHTML),plain=document.createElement('div');plain.innerHTML=html;return {html,text:plain.textContent||''} }
+function renderMessageText(message){return message.html?sanitizeRichHtml(message.html):esc(message.text||'')}
+function wrapTextRange(container,start,end,className,annotationId){
+  const walker=document.createTreeWalker(container,NodeFilter.SHOW_TEXT);let position=0,startPoint=null,endPoint=null,node;
+  while((node=walker.nextNode())){const length=node.nodeValue.length;if(!startPoint&&start<=position+length)startPoint={node,offset:Math.max(0,start-position)};if(end<=position+length){endPoint={node,offset:Math.max(0,end-position)};break}position+=length}
+  if(!startPoint||!endPoint)return;const range=document.createRange();range.setStart(startPoint.node,startPoint.offset);range.setEnd(endPoint.node,endPoint.offset);const mark=document.createElement('span');mark.className=`feedback-highlight ${className}`;mark.dataset.annotationId=annotationId;mark.append(range.extractContents());range.insertNode(mark);
+}
+function applyMessageHighlights(chatId,threadId){
+  const thread=getChatThreads(chatId).find(item=>item.id===threadId);if(!thread)return;
+  $('#messages').querySelectorAll('.message-row[data-message-id]').forEach(row=>{const message=thread.messages.find(item=>item.id===row.dataset.messageId),text=row.querySelector('.message-text');if(!message||!text)return;for(const annotation of message.annotations||[]){if(annotation.start>=0&&annotation.end<=text.textContent.length&&annotation.start<annotation.end)wrapTextRange(text,annotation.start,annotation.end,annotation.authorRole==='teacher'?'teacher-highlight':'student-highlight',annotation.id)}});
 }
 function renderFeedback(message){
   const annotations=message.annotations||[];if(!annotations.length)return '';
@@ -288,12 +299,18 @@ function openEventDetail(eventId){
 function formatDate(iso){const [y,m,d]=iso.split('-').map(Number);return `${m}월 ${d}일`}
 function formatPostedDate(timestamp){return new Date(timestamp).toLocaleDateString('ko-KR',{month:'long',day:'numeric'})}
 function toggleCalendar(){const drawer=$('#calendarDrawer'),shell=$('#shell');if(innerWidth<=720&&!shell.classList.contains('chat-open')){shell.classList.add('chat-open');drawer.classList.add('open')}else drawer.classList.toggle('open');$('#calendarToggle').classList.toggle('selected',drawer.classList.contains('open'))}
-function sendMessage(text){
+function sendMessage(text,html=''){
   const id=data.selectedId,teacher=data.role==='teacher';const chatId=teacher?id:(isGroup(id)?id:(id==='teacher'?currentStudentId():id));
   if(!text.trim())return;const thread=openThread?.chatId===id?getChatThreads(chatId).find(item=>item.id===openThread.threadId):null;if(!thread){notify('먼저 대화 스레드를 열어 주세요.');return}
-  thread.messages ||= [];thread.messages.push({id:`message-${Date.now()}`,from:teacher?'teacher':currentStudentId(),text:text.trim(),time:new Intl.DateTimeFormat('ko-KR',{hour:'numeric',minute:'2-digit'}).format(new Date()),annotations:[]});thread.updatedAt=Date.now();
+  thread.messages ||= [];thread.messages.push({id:`message-${Date.now()}`,from:teacher?'teacher':currentStudentId(),text,html,time:new Intl.DateTimeFormat('ko-KR',{hour:'numeric',minute:'2-digit'}).format(new Date()),annotations:[]});thread.updatedAt=Date.now();
   if(teacher&&!isGroup(id))data.unread[id]=(data.unread[id]||0)+1;
-  $('#messageInput').value='';save();render();$('#messageInput').focus();notify(teacher?'메시지를 보냈어요.':'메시지를 보냈어요.');
+  $('#messageInput').innerHTML='';save();render();$('#messageInput').focus();notify(teacher?'메시지를 보냈어요.':'메시지를 보냈어요.');
+}
+function applyMessageFormat(format){
+  const editor=$('#messageInput');editor.focus();
+  const commands={bold:'bold',italic:'italic',underline:'underline',unorderedList:'insertUnorderedList',orderedList:'insertOrderedList'};
+  if(format==='checklist'){const selection=getSelection();if(selection&&!selection.isCollapsed){const range=selection.getRangeAt(0),box=document.createElement('span');box.className='checklist-mark';box.textContent='☐';const contents=range.extractContents(),fragment=document.createDocumentFragment();fragment.append(box,document.createTextNode(' '),contents);range.insertNode(fragment);selection.removeAllRanges()}else document.execCommand('insertText',false,'☐ ')}else if(commands[format])document.execCommand(commands[format],false,null);
+  editor.focus();
 }
 function notify(message){const toast=$('#toast');toast.textContent=message;toast.classList.add('show');clearTimeout(notify.timer);notify.timer=setTimeout(()=>toast.classList.remove('show'),2200)}
 function openModal(title,body,onSubmit){$('#modalTitle').textContent=title;$('#modalForm').innerHTML=body;$('#modalBackdrop').classList.add('open');$('#modalForm').onsubmit=e=>{e.preventDefault();onSubmit(new FormData(e.currentTarget));};$('#modalForm').querySelector('input,textarea')?.focus()}
@@ -340,8 +357,9 @@ $('#announcementNav').addEventListener('click',()=>{sidebarMode='announcements';
 $('#addAnnouncementButton').addEventListener('click',openAnnouncementModal);
 $('#addGroupButton').addEventListener('click',openGroupModal);$('#groupCreateShortcut').addEventListener('click',openGroupModal);$('#groupHeader').addEventListener('click',openGroupModal);
 $('#historyButton').addEventListener('click',()=>notify(data.role==='teacher'?'학생과 주고받은 대화는 이 대화창에 기록돼요.':'선생님은 학생과 주고받은 대화를 확인할 수 있어요.'));
-$('#messageForm').addEventListener('submit',e=>{e.preventDefault();sendMessage($('#messageInput').value)});
-$('#messageInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('#messageForm').requestSubmit()}if(e.key==='Enter'&&e.shiftKey){setTimeout(()=>{e.target.style.height='auto';e.target.style.height=`${Math.min(e.target.scrollHeight,100)}px`},0)}});
+$('#messageForm').addEventListener('submit',e=>{e.preventDefault();const content=editorContent($('#messageInput'));sendMessage(content.text,content.html)});
+$('#messageInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('#messageForm').requestSubmit()}else if(e.key==='Enter'&&e.shiftKey){e.preventDefault();document.execCommand('insertHTML',false,'<br><br>')}});
+$('#formatToolbar').addEventListener('mousedown',e=>{if(e.target.closest('button'))e.preventDefault()});$('#formatToolbar').addEventListener('click',e=>{const button=e.target.closest('[data-format]');if(button)applyMessageFormat(button.dataset.format)});
 $('#messages').addEventListener('mouseup',handleMessageSelection);$('#messages').addEventListener('touchend',()=>setTimeout(handleMessageSelection,0));$('#messages').addEventListener('submit',handleFeedbackSubmit);$('#messages').addEventListener('click',handleFeedbackClick);
 $('#modalClose').addEventListener('click',closeModal);$('#modalBackdrop').addEventListener('click',e=>{if(e.target.id==='modalBackdrop')closeModal()});$('#threadListBack').addEventListener('click',()=>{openThread=null;openAnnouncementId=null;pendingFeedback=null;replyingTo=null;renderChat()});$('#mobileBack').addEventListener('click',()=>{openThread=null;openAnnouncementId=null;pendingFeedback=null;replyingTo=null;$('#shell').classList.remove('chat-open')});
 $('#chatNav').addEventListener('click',()=>{sidebarMode='chats';openThread=null;openAnnouncementId=null;if(innerWidth<=720)$('#shell').classList.remove('chat-open');$('#calendarDrawer').classList.remove('open');$('#calendarToggle').classList.remove('selected');render()});
