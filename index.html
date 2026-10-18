@@ -20,7 +20,8 @@
 </style>
 <style>
 .contact-section.pinned{position:sticky;top:0;z-index:2;background:#fff;border-bottom:1px solid var(--line);padding:0 0 8px}
-.thread-list-view{max-width:760px;margin:0 auto;padding:20px 4px}.thread-list-heading{margin:0 0 18px}.thread-list-heading .eyebrow{margin:0 0 5px}.thread-list-heading h2{font:800 20px Manrope,'Noto Sans KR',sans-serif;letter-spacing:-.04em;margin:0}.thread-list-heading p{margin:5px 0 0;color:#89928b;font-size:12px}.thread-heading-row{display:flex;align-items:center;justify-content:space-between;gap:12px}.thread-new-button{min-height:38px;padding:0 13px;border:0;border-radius:9px;background:var(--navy);color:#fff;font-size:11px;font-weight:700}.thread-card-list{display:grid;gap:9px}.thread-card{width:100%;display:flex;align-items:center;gap:14px;padding:17px;border:1px solid var(--line);border-radius:13px;background:#fff;text-align:left;color:var(--ink);transition:border-color .16s,background .16s,transform .16s}.thread-card:hover{border-color:#cbdcbf;background:#fbfdf8;transform:translateY(-1px)}.thread-card-icon{width:42px;height:42px;flex:none;border-radius:13px;background:#eef4e9;color:#557849;display:grid;place-items:center}.thread-card-copy{min-width:0;flex:1}.thread-card-title{font-size:13px;font-weight:800}.thread-card-preview{font-size:12px;color:#778179;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:4px}.thread-card-meta{font-size:10px;color:#a0a79f;margin-top:6px}.thread-card-arrow{color:#9aa49b}.thread-list-back{display:none}.modal-intro{font-size:12px;line-height:1.7;color:#758078;margin:0 0 16px}.optional-label{font-weight:400;color:#9aa29b}
+.thread-list-view{max-width:760px;margin:0 auto;padding:20px 4px}.thread-list-heading{margin:0 0 18px}.thread-list-heading .eyebrow{margin:0 0 5px}.thread-list-heading h2{font:800 20px Manrope,'Noto Sans KR',sans-serif;letter-spacing:-.04em;margin:0}.thread-list-heading p{margin:5px 0 0;color:#89928b;font-size:12px}.thread-heading-row{display:flex;align-items:center;justify-content:space-between;gap:12px}.thread-new-button{min-height:38px;padding:0 13px;border:0;border-radius:9px;background:var(--navy);color:#fff;font-size:11px;font-weight:700}.thread-card-list{display:grid;gap:9px}.thread-card{width:100%;display:flex;align-items:center;gap:14px;padding:17px;border:1px solid var(--line);border-radius:13px;background:#fff;text-align:left;color:var(--ink);transition:border-color .16s,background .16s,transform .16s}.thread-card:hover{border-color:#cbdcbf;background:#fbfdf8;transform:translateY(-1px)}.thread-card-icon{width:42px;height:42px;flex:none;border-radius:13px;background:#eef4e9;color:#557849;display:grid;place-items:center}.thread-card-copy{min-width:0;flex:1}.thread-card-title,.thread-card-preview,.thread-card-meta{display:block}.thread-card-title{font-size:13px;font-weight:800}.thread-card-preview{font-size:12px;color:#778179;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:4px}.thread-card-meta{font-size:10px;color:#a0a79f;margin-top:6px}.thread-card-arrow{color:#9aa49b}.thread-list-back{display:none}.modal-intro{font-size:12px;line-height:1.7;color:#758078;margin:0 0 16px}.optional-label{font-weight:400;color:#9aa29b}
+.announcement-list{display:grid;gap:8px;padding:0 3px 10px}.announcement-list-item{width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:11px;padding:12px;color:var(--ink)}.announcement-list-item:hover{border-color:#cbdcbf;background:#fbfdf8}.announcement-list-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#929a93;font-size:10px}.deadline-pill{display:inline-flex;align-items:center;padding:3px 8px;border-radius:99px;background:#fff0d8;color:#946522;font-size:9px;font-weight:800;white-space:nowrap}.announcement-list-title{display:block;margin-top:7px;font-size:12px;font-weight:800}.announcement-list-preview{display:block;margin-top:4px;color:#7e8880;font-size:10px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.announcement-list-empty{padding:22px 12px;text-align:center;color:#8b948d;font-size:11px}.announcement-create{display:none}.announcement-detail-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:9px}.announcement-deadline{display:inline-flex;padding:4px 9px;border-radius:99px;background:#fff0d8;color:#946522;font-size:10px;font-weight:800}
 </style>
 </head>
 <body>
@@ -32,8 +33,8 @@
   <div class="shell" id="shell">
     <aside class="sidebar">
       <div class="side-top"><div class="eyebrow" id="classEyebrow">MY CLASSROOM</div><select class="class-picker" id="classPicker" aria-label="학급 선택"><option>5학년 2반</option><option>5학년 1반</option><option>4학년 3반</option></select></div>
-      <nav class="side-nav" aria-label="주요 메뉴"><button id="chatNav" class="selected" aria-label="대화 목록" title="대화"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H6l-3 2v-6a7.5 7.5 0 1 1 17-3.5Z"/></svg><span class="badge-dot" id="navDot"></span></button><button id="calendarToggle" aria-label="캘린더 보기" title="캘린더"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/></svg></button><button id="groupCreateShortcut" aria-label="모둠 편성" title="모둠"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M9.5 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 8v6M23 11h-6"/></svg></button></nav>
-      <div class="list-head"><span id="listLabel">대화 상대</span><button id="addGroupButton" aria-label="새 모둠 만들기" title="새 모둠 만들기"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div>
+      <nav class="side-nav" aria-label="주요 메뉴"><button id="chatNav" class="selected" aria-label="대화 목록" title="대화"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H6l-3 2v-6a7.5 7.5 0 1 1 17-3.5Z"/></svg><span class="badge-dot" id="navDot"></span></button><button id="calendarToggle" aria-label="캘린더 보기" title="캘린더"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/></svg></button><button id="announcementNav" aria-label="공지사항 보기" title="공지사항"><svg viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 13v-2ZM5 14l2 7h4l-2-6M21 10v4"/><path d="M3 11v2a2 2 0 0 0 2 2"/></svg></button><button id="groupCreateShortcut" aria-label="모둠 편성" title="모둠"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M9.5 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 8v6M23 11h-6"/></svg></button></nav>
+      <div class="list-head"><span id="listLabel">대화 상대</span><button id="addGroupButton" aria-label="새 모둠 만들기" title="새 모둠 만들기"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><button id="addAnnouncementButton" class="announcement-create" aria-label="공지 작성" title="공지 작성"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div>
       <div class="contacts" id="contactList"></div>
       <div class="sidebar-bottom"><svg class="privacy-symbol" viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg><span id="privacyFooter">안전한 학급 소통 공간</span></div>
     </aside>
@@ -67,6 +68,11 @@ const initialData = {
     {id:'e2',date:'2026-10-22',title:'책 읽는 날',detail:'함께 읽고 싶은 책 한 권을 가져와요.',readBy:['s1','s3','s5']},
     {id:'e3',date:'2026-10-26',title:'학급 발표회',detail:'모둠별 발표 순서를 확인해 주세요.',readBy:['s2']}
   ],
+  announcements:[
+    {id:'a1',title:'수학 학습지 제출 안내',content:'이번 주에 푼 학습지를 확인하고 제출해 주세요.',postedAt:'2026-10-17T08:30:00.000Z',deadlineAt:'2026-10-20'},
+    {id:'a2',title:'도서관 책 반납 안내',content:'빌린 책을 도서관 반납함에 넣어 주세요.',postedAt:'2026-10-16T03:00:00.000Z',deadlineAt:''},
+    {id:'a3',title:'아침 독서 준비',content:'읽고 싶은 책 한 권을 교실에 가져와 주세요.',postedAt:'2026-10-15T23:00:00.000Z',deadlineAt:'2026-10-21'}
+  ],
   chats:{
     s1:[{from:'teacher',text:'하늘아, 오늘 발표 준비하느라 수고했어요! 궁금한 점 있으면 편하게 남겨 주세요.',time:'오전 9:18'},{from:'student',text:'감사합니다 선생님! 그림 자료는 내일 가져가도 될까요?',time:'오전 9:26'},{from:'teacher',text:'네, 내일까지 준비하면 충분해요. 친구들과 역할도 나눠 보세요 :)',time:'오전 9:30'}],
     s2:[{from:'teacher',text:'도윤아, 수학 문제 4번 풀이를 같이 확인해 봐요.',time:'오전 10:04'},{from:'student',text:'제가 계산한 방법을 사진 대신 글로 적어볼게요.',time:'오전 10:12'}],
@@ -81,7 +87,9 @@ const initialData = {
 };
 let data;
 let openThread=null;
+let sidebarMode='chats';
 try{data=JSON.parse(localStorage.getItem(storageKey))||initialData}catch{data=initialData}
+data.announcements ||= initialData.announcements;
 data.chatThreads ||= {};
 Object.entries(data.chats||{}).forEach(([chatId,messages])=>{if(!data.chatThreads[chatId])data.chatThreads[chatId]=[{id:`main-${chatId}`,title:'기존 대화',messages:Array.isArray(messages)?messages:[],createdAt:0,updatedAt:0}]});
 const classPresets={
@@ -114,13 +122,16 @@ function setRole(role){data.role=role;openThread=null;if(role==='student'){data.
 function render(){
   const teacher=data.role==='teacher';
   $('#teacherRole').classList.toggle('active',teacher);$('#studentRole').classList.toggle('active',!teacher);
+  $('#chatNav').classList.toggle('selected',sidebarMode==='chats');$('#announcementNav').classList.toggle('selected',sidebarMode==='announcements');
   $('#roleName').textContent=teacher?'박서연 선생님':data.studentName;$('#headerAvatar').textContent=teacher?'서':initials(data.studentName);
   $('#classEyebrow').textContent=teacher?'MY CLASSROOM':'MY CLASS';$('#privacyFooter').textContent=teacher?'안전한 학급 소통 공간':'대화는 선생님이 확인할 수 있어요';
   $('#classPicker').value=data.className;$('#classPicker').disabled=!teacher;
-  $('#listLabel').textContent='대화 상대';$('#addGroupButton').style.display=teacher?'grid':'none';$('#groupCreateShortcut').style.display=teacher?'grid':'none';
+  $('#addGroupButton').style.display=teacher&&sidebarMode==='chats'?'grid':'none';$('#addAnnouncementButton').style.display=teacher&&sidebarMode==='announcements'?'grid':'none';$('#groupCreateShortcut').style.display=teacher?'grid':'none';
   renderContacts();renderChat();renderCalendar();
 }
 function renderContacts(){
+  if(sidebarMode==='announcements'){renderAnnouncementList();return}
+  $('#listLabel').textContent='대화 상대';
   const teacher=data.role==='teacher';let peopleRows=[],groupRows=[];
   if(teacher){
     peopleRows=data.students.map(p=>({id:p.id,name:p.name,avatar:avatar(p.name,p.color),tag:'',preview:getLast(p.id)}));
@@ -136,7 +147,13 @@ function renderContacts(){
   const renderRows=rows=>rows.length?rows.map(row=>`<button class="contact ${data.selectedId===row.id?'active':''}" data-contact="${esc(row.id)}" type="button">${row.avatar}<span class="contact-copy"><span class="contact-name">${esc(row.name)}${row.tag?`<span class="group-tag">${row.tag}</span>`:''}</span><span class="contact-preview">${esc(row.preview)}</span></span>${data.unread?.[row.id]?`<span class="unread">${data.unread[row.id]}</span>`:`<span class="contact-time">${esc(getTime(row.id))}</span>`}</button>`).join(''):'<div class="empty-state">아직 대화가 없어요.</div>';
   const section=(title,rows,pinned=false)=>`<section class="contact-section${pinned?' pinned':''}"><div class="contact-section-title">${title}<span class="section-count">${rows.length}</span></div>${renderRows(rows)}</section>`;
   $('#contactList').innerHTML=teacher?`${section('학생 대화',peopleRows)}${section('모둠 대화',groupRows)}`:`${section('모둠 대화',groupRows,true)}${section('선생님 대화',peopleRows)}`;
-  $('#contactList').querySelectorAll('[data-contact]').forEach(btn=>btn.addEventListener('click',()=>{data.selectedId=btn.dataset.contact;openThread=null;delete data.unread[data.selectedId];save();$('#shell').classList.add('chat-open');render()}));
+  $('#contactList').querySelectorAll('[data-contact]').forEach(btn=>btn.addEventListener('click',()=>{sidebarMode='chats';data.selectedId=btn.dataset.contact;openThread=null;delete data.unread[data.selectedId];save();$('#shell').classList.add('chat-open');render()}));
+}
+function renderAnnouncementList(){
+  $('#listLabel').textContent='공지사항';
+  const announcements=[...data.announcements].sort((a,b)=>new Date(b.postedAt)-new Date(a.postedAt)).slice(0,3);
+  $('#contactList').innerHTML=announcements.length?`<div class="announcement-list">${announcements.map(item=>`<button class="announcement-list-item" data-announcement="${esc(item.id)}" type="button"><span class="announcement-list-meta"><span>${formatPostedDate(item.postedAt)}</span>${item.deadlineAt?'<span class="deadline-pill">마감 확인</span>':''}</span><span class="announcement-list-title">${esc(item.title)}</span><span class="announcement-list-preview">${esc(item.content)}</span></button>`).join('')}</div><div class="announcement-list-empty">최신 공지 최대 3개를 게시일 순으로 보여드려요.</div>`:'<div class="announcement-list-empty">등록된 공지사항이 없어요.</div>';
+  $('#contactList').querySelectorAll('[data-announcement]').forEach(button=>button.addEventListener('click',()=>openAnnouncementDetail(button.dataset.announcement)));
 }
 function renderChat(){
   let id=data.selectedId|| (data.role==='teacher'?data.students[0]?.id:'teacher');if(data.role==='student'&&!studentCanOpenConversation(id))id='teacher';data.selectedId=id;
@@ -153,10 +170,11 @@ function renderChat(){
   }else{
     const sortedThreads=[...threads].sort((a,b)=>(b.updatedAt||b.createdAt||0)-(a.updatedAt||a.createdAt||0));
     const cards=sortedThreads.map(thread=>{const latest=thread.messages?.at(-1),preview=latest?.text||'아직 대화가 없어요. 눌러서 대화를 시작해 보세요.';return `<button class="thread-card" data-open-thread="${esc(thread.id)}" type="button"><span class="thread-card-icon"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H6l-3 2v-6a7.5 7.5 0 1 1 17-3.5Z"/><path d="M8 10h8M8 14h5"/></svg></span><span class="thread-card-copy"><span class="thread-card-title">${esc(thread.title)}</span><span class="thread-card-preview">${esc(preview)}</span><span class="thread-card-meta">메시지 ${thread.messages?.length||0}개${latest?.time?` · 최근 ${esc(latest.time)}`:''}</span></span><svg class="thread-card-arrow" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>`}).join('');
-    const createButton=data.role==='student'&&isGroup(id)?'<button class="thread-new-button" id="newGroupThread" type="button">+ 새 대화</button>':'';
+    const createButton=isGroup(id)?(data.role==='student'?'<button class="thread-new-button" id="newGroupThread" type="button">+ 새 대화</button>':''):'<button class="thread-new-button" id="newPrivateThread" type="button">+ 새 대화</button>';
     $('#messages').innerHTML=`<div class="thread-list-view"><div class="thread-list-heading"><p class="eyebrow">${isGroup(id)?'GROUP THREAD':'MESSAGE THREAD'}</p><div class="thread-heading-row"><h2>대화 스레드</h2>${createButton}</div><p>목록을 선택하면 실제 대화 내용을 볼 수 있어요.</p></div><div class="thread-card-list">${cards}</div></div>`;
     $('#messages').querySelectorAll('[data-open-thread]').forEach(button=>button.addEventListener('click',()=>{openThread={chatId:id,threadId:button.dataset.openThread};renderChat()}));
     $('#newGroupThread')?.addEventListener('click',openNewGroupThread);
+    $('#newPrivateThread')?.addEventListener('click',openNewPrivateThread);
   }
   $('#threadListBack').style.display=threadOpen?'grid':'none';$('#composerWrap').style.display=threadOpen?'':'none';
   $('#messages').scrollTop=$('#messages').scrollHeight;
@@ -192,6 +210,7 @@ function openEventDetail(eventId){
   $('#modalForm [data-cancel]').addEventListener('click',closeModal);
 }
 function formatDate(iso){const [y,m,d]=iso.split('-').map(Number);return `${m}월 ${d}일`}
+function formatPostedDate(timestamp){return new Date(timestamp).toLocaleDateString('ko-KR',{month:'long',day:'numeric'})}
 function toggleCalendar(){const drawer=$('#calendarDrawer'),shell=$('#shell');if(innerWidth<=720&&!shell.classList.contains('chat-open')){shell.classList.add('chat-open');drawer.classList.add('open')}else drawer.classList.toggle('open');$('#calendarToggle').classList.toggle('selected',drawer.classList.contains('open'))}
 function sendMessage(text){
   const id=data.selectedId,teacher=data.role==='teacher';const chatId=teacher?id:(isGroup(id)?id:(id==='teacher'?currentStudentId():id));
@@ -215,20 +234,40 @@ function openNewGroupThread(){
   openModal('새 모둠 대화',`<p class="modal-intro">${esc(selectedGroup.name)} 구성원과 함께하는 단체 스레드예요.<br>${esc(memberNames)}</p><div class="form-field"><label for="threadTitleInput">대화 제목</label><input id="threadTitleInput" name="title" required maxlength="40" placeholder="예: 발표 자료 준비"></div><div class="form-field"><label for="threadMessageInput">첫 메시지 <span class="optional-label">선택</span></label><textarea id="threadMessageInput" name="message" placeholder="모둠 친구들에게 전할 내용을 적어 주세요."></textarea></div><div class="modal-actions"><button type="button" data-cancel>취소</button><button class="primary" type="submit">단체 대화 만들기</button></div>`,form=>{const title=String(form.get('title')||'').trim(),firstMessage=String(form.get('message')||'').trim();if(!title)return;const threadId=`thread-${Date.now()}`,now=Date.now(),thread={id:threadId,title,messages:[],createdAt:now,updatedAt:now};if(firstMessage)thread.messages.push({from:currentStudentId(),text:firstMessage,time:new Intl.DateTimeFormat('ko-KR',{hour:'numeric',minute:'2-digit'}).format(new Date())});getChatThreads(chatId).push(thread);openThread={chatId,threadId};save();closeModal();renderChat();notify('새 모둠 대화 스레드를 만들었어요.')});
   $('#modalForm [data-cancel]').addEventListener('click',closeModal);
 }
+function openNewPrivateThread(){
+  const selectedId=data.selectedId,teacher=data.role==='teacher';
+  if(isGroup(selectedId)||(!teacher&&selectedId!=='teacher'))return;
+  const chatId=teacher?selectedId:currentStudentId(),personName=teacher?(student(selectedId)?.name||'학생'):'박서연 선생님';
+  openModal('새 개인 대화',`<p class="modal-intro">${esc(personName)}님과 나눌 새 대화 스레드예요.</p><div class="form-field"><label for="threadTitleInput">대화 제목</label><input id="threadTitleInput" name="title" required maxlength="40" placeholder="예: 준비물 질문"></div><div class="form-field"><label for="threadMessageInput">첫 메시지 <span class="optional-label">선택</span></label><textarea id="threadMessageInput" name="message" placeholder="대화를 시작할 내용을 적어 주세요."></textarea></div><div class="modal-actions"><button type="button" data-cancel>취소</button><button class="primary" type="submit">대화 만들기</button></div>`,form=>{const title=String(form.get('title')||'').trim(),firstMessage=String(form.get('message')||'').trim();if(!title)return;const threadId=`thread-${Date.now()}`,now=Date.now(),thread={id:threadId,title,messages:[],createdAt:now,updatedAt:now};if(firstMessage)thread.messages.push({from:teacher?'teacher':currentStudentId(),text:firstMessage,time:new Intl.DateTimeFormat('ko-KR',{hour:'numeric',minute:'2-digit'}).format(new Date())});getChatThreads(chatId).push(thread);openThread={chatId:selectedId,threadId};save();closeModal();renderChat();notify('새 개인 대화 스레드를 만들었어요.')});
+  $('#modalForm [data-cancel]').addEventListener('click',closeModal);
+}
 function openEventModal(){
   const today='2026-10-20';
   openModal('학생에게 일정 공지',`<div class="form-field"><label for="eventTitle">공지 제목</label><input id="eventTitle" name="title" required maxlength="40" placeholder="예: 과학 준비물 가져오기"></div><div class="form-field"><label for="eventDate">날짜</label><input id="eventDate" name="date" type="date" value="${today}" required></div><div class="form-field"><label for="eventDetail">안내 내용</label><textarea id="eventDetail" name="detail" placeholder="학생에게 전할 내용을 적어 주세요."></textarea></div><div class="modal-actions"><button type="button" data-cancel>취소</button><button class="primary" type="submit">공지 등록</button></div>`,form=>{const title=String(form.get('title')||'').trim();if(!title)return;data.events.push({id:`e${Date.now()}`,title,date:String(form.get('date')),detail:String(form.get('detail')||'').trim(),readBy:[]});save();closeModal();renderCalendar();$('#calendarDrawer').classList.add('open');notify('학급 캘린더에 일정을 등록했어요.')});
   $('#modalForm [data-cancel]').addEventListener('click',closeModal);
 }
+function openAnnouncementModal(){
+  openModal('새 공지사항',`<div class="form-field"><label for="announcementTitle">공지 제목</label><input id="announcementTitle" name="title" required maxlength="60" placeholder="예: 수학 학습지 제출 안내"></div><div class="form-field"><label for="announcementContent">공지 내용</label><textarea id="announcementContent" name="content" required placeholder="학생들에게 전달할 내용을 적어 주세요."></textarea></div><label class="student-check"><input id="hasDeadline" name="hasDeadline" type="checkbox" value="yes">마감일이 있는 공지예요</label><div class="form-field"><label for="announcementDeadline">마감일</label><input id="announcementDeadline" name="deadlineAt" type="date" disabled></div><div class="modal-actions"><button type="button" data-cancel>취소</button><button class="primary" type="submit">공지 게시</button></div>`,form=>{const title=String(form.get('title')||'').trim(),content=String(form.get('content')||'').trim(),hasDeadline=form.get('hasDeadline')==='yes',deadlineAt=hasDeadline?String(form.get('deadlineAt')||''):'';if(!title||!content)return;if(hasDeadline&&!deadlineAt){notify('마감일을 선택해 주세요.');return}data.announcements.push({id:`a${Date.now()}`,title,content,postedAt:new Date().toISOString(),deadlineAt});save();closeModal();sidebarMode='announcements';render();notify('공지사항을 게시했어요.')});
+  $('#hasDeadline').addEventListener('change',event=>{$('#announcementDeadline').disabled=!event.target.checked;if(event.target.checked)$('#announcementDeadline').focus()});
+  $('#modalForm [data-cancel]').addEventListener('click',closeModal);
+}
+function openAnnouncementDetail(id){
+  const item=data.announcements.find(announcement=>announcement.id===id);if(!item)return;
+  const deadline=item.deadlineAt?`<span class="announcement-deadline">마감 확인 · ${formatDate(item.deadlineAt)}</span>`:'';
+  openModal('공지사항',`<div class="announcement-detail-meta"><span class="announcement-date">게시 ${formatPostedDate(item.postedAt)}</span>${deadline}</div><article class="announcement-detail"><h3>${esc(item.title)}</h3><p>${esc(item.content)}</p></article><div class="modal-actions"><button type="button" data-cancel>닫기</button></div>`,()=>{});
+  $('#modalForm [data-cancel]').addEventListener('click',closeModal);
+}
 $('#teacherRole').addEventListener('click',()=>setRole('teacher'));$('#studentRole').addEventListener('click',()=>setRole('student'));
 $('#classPicker').addEventListener('change',e=>{const next=e.target.value;data.classrooms[data.className]={students:data.students,groups:data.groups,studentId:data.studentId,studentName:data.studentName};const room=data.classrooms[next]||classPresets[next];data.className=next;data.students=room.students;data.groups=room.groups;data.studentId=room.studentId||room.students[0]?.id||'';data.studentName=room.studentName||student(data.studentId)?.name||data.studentName;data.selectedId=data.students[0]?.id||'';save();render();notify(`${data.className} 학생 목록을 불러왔어요.`)});
 $('#calendarToggle').addEventListener('click',toggleCalendar);$('#calendarHeader').addEventListener('click',toggleCalendar);
+$('#announcementNav').addEventListener('click',()=>{sidebarMode='announcements';openThread=null;$('#calendarDrawer').classList.remove('open');$('#calendarToggle').classList.remove('selected');render()});
+$('#addAnnouncementButton').addEventListener('click',openAnnouncementModal);
 $('#addGroupButton').addEventListener('click',openGroupModal);$('#groupCreateShortcut').addEventListener('click',openGroupModal);$('#groupHeader').addEventListener('click',openGroupModal);
 $('#historyButton').addEventListener('click',()=>notify(data.role==='teacher'?'학생과 주고받은 대화는 이 대화창에 기록돼요.':'선생님은 학생과 주고받은 대화를 확인할 수 있어요.'));
 $('#messageForm').addEventListener('submit',e=>{e.preventDefault();sendMessage($('#messageInput').value)});
 $('#messageInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('#messageForm').requestSubmit()}if(e.key==='Enter'&&e.shiftKey){setTimeout(()=>{e.target.style.height='auto';e.target.style.height=`${Math.min(e.target.scrollHeight,100)}px`},0)}});
 $('#modalClose').addEventListener('click',closeModal);$('#modalBackdrop').addEventListener('click',e=>{if(e.target.id==='modalBackdrop')closeModal()});$('#threadListBack').addEventListener('click',()=>{openThread=null;renderChat()});$('#mobileBack').addEventListener('click',()=>{openThread=null;$('#shell').classList.remove('chat-open')});
-$('#chatNav').addEventListener('click',()=>{if(innerWidth<=720)$('#shell').classList.remove('chat-open');$('#calendarDrawer').classList.remove('open');$('#calendarToggle').classList.remove('selected')});
+$('#chatNav').addEventListener('click',()=>{sidebarMode='chats';if(innerWidth<=720)$('#shell').classList.remove('chat-open');$('#calendarDrawer').classList.remove('open');$('#calendarToggle').classList.remove('selected');render()});
 render();if(innerWidth<=720)$('#shell').classList.add('chat-open');
 </script>
 </body>
