@@ -32,6 +32,9 @@
 <style>
 .feedback-attachment{display:flex;align-items:flex-start;gap:9px;padding:9px 10px;border:1px solid #eee5c5;border-radius:9px;background:#fffdf5;margin-bottom:8px}.feedback-attachment-icon{width:28px;height:28px;flex:none;display:grid;place-items:center;border-radius:7px;background:#fff1b8;color:#826e2d}.feedback-attachment-icon svg{width:15px;height:15px}.feedback-attachment-copy{min-width:0;flex:1}.feedback-attachment-label{display:block;font-size:9px;font-weight:700;color:#8e8152}.feedback-attachment-text{display:block;margin-top:3px;color:#4d574f;font-size:11px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}.feedback-compose .feedback-attachment{margin:0 0 9px}
 </style>
+<style>
+.feedback-comment{padding:7px 9px;border-radius:8px;background:#fafbf8}.feedback-comment-text{font-size:11px;line-height:1.6;color:#465149;white-space:pre-wrap;overflow-wrap:anywhere}.feedback-comment-text[data-feedback-target="true"]{cursor:text}.feedback-subthread{margin:8px 0 2px 7px;padding-left:9px;border-left:2px solid #e6d268}.feedback-subthread>.feedback-attachment{background:#fffdf5}
+</style>
 </head>
 <body>
 <div class="app">
@@ -232,14 +235,25 @@ function wrapTextRange(container,start,end,className,annotationId){
 }
 function applyMessageHighlights(chatId,threadId){
   const thread=getChatThreads(chatId).find(item=>item.id===threadId);if(!thread)return;
-  $('#messages').querySelectorAll('.message-row[data-message-id]').forEach(row=>{const message=thread.messages.find(item=>item.id===row.dataset.messageId),text=row.querySelector('.message-text');if(!message||!text)return;for(const annotation of message.annotations||[]){if(annotation.start>=0&&annotation.end<=text.textContent.length&&annotation.start<annotation.end)wrapTextRange(text,annotation.start,annotation.end,annotation.authorRole==='teacher'?'teacher-highlight':'student-highlight',annotation.id)}});
+  $('#messages').querySelectorAll('.message-row[data-message-id]').forEach(row=>{const message=thread.messages.find(item=>item.id===row.dataset.messageId),text=row.querySelector('.message-text');if(!message||!text)return;for(const annotation of message.annotations||[]){if(annotation.start>=0&&annotation.end<=text.textContent.length&&annotation.start<annotation.end)wrapTextRange(text,annotation.start,annotation.end,annotation.authorRole==='teacher'?'teacher-highlight':'student-highlight',annotation.id)}row.querySelectorAll('[data-feedback-comment-id]').forEach(element=>{const parent=findFeedbackAnnotation(message.annotations,element.dataset.parentAnnotationId),comment=parent?.comments?.find(item=>item.id===element.dataset.feedbackCommentId),commentText=element.querySelector('.feedback-comment-text');if(!comment||!commentText)return;for(const annotation of comment.annotations||[]){if(annotation.start>=0&&annotation.end<=commentText.textContent.length&&annotation.start<annotation.end)wrapTextRange(commentText,annotation.start,annotation.end,annotation.authorRole==='teacher'?'teacher-highlight':'student-highlight',annotation.id)}})});
 }
+function findFeedbackAnnotation(annotations,id){for(const annotation of annotations||[]){if(annotation.id===id)return annotation;for(const comment of annotation.comments||[]){const found=findFeedbackAnnotation(comment.annotations,id);if(found)return found}}return null}
 function renderQuoteAttachment(quote,label='선택한 문장'){
   return `<div class="feedback-attachment"><span class="feedback-attachment-icon"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v5h5M8 13h8M8 17h6"/></svg></span><span class="feedback-attachment-copy"><span class="feedback-attachment-label">${esc(label)}</span><span class="feedback-attachment-text">${esc(quote)}</span></span></div>`;
 }
+function renderFeedbackComment(comment,messageId,parentAnnotationId){
+  const canSelect=data.role==='teacher'?comment.authorRole==='student':comment.authorRole==='teacher';
+  const nested=(comment.annotations||[]).map(annotation=>`<div class="feedback-subthread">${renderQuoteAttachment(annotation.quote,'선택한 피드백 문장')}${renderFeedbackComments(annotation,messageId,comment.id,parentAnnotationId)}</div>`).join('');
+  return `<div class="feedback-comment ${comment.authorRole==='student'?'student-feedback':''}" data-feedback-comment-id="${esc(comment.id)}" data-parent-annotation-id="${esc(parentAnnotationId)}"><div class="feedback-comment-text" data-feedback-target="${canSelect?'true':'false'}">${esc(comment.text)}</div><div class="feedback-comment-meta">${esc(comment.authorName)} · ${esc(comment.time||'방금')}</div>${nested}</div>`;
+}
+function renderFeedbackComments(annotation,messageId,parentCommentId='',parentAnnotationId=''){
+  const comments=(annotation.comments||[]).map(comment=>renderFeedbackComment(comment,messageId,annotation.id)).join('');
+  const open=replyingTo?.messageId===messageId&&replyingTo.annotationId===annotation.id&&(replyingTo.commentId||'')===parentCommentId&&(replyingTo.parentAnnotationId||'')===parentAnnotationId;
+  return `${comments}<div class="feedback-entry-actions"><button class="feedback-reply-button" data-feedback-reply="${esc(annotation.id)}" data-message="${esc(messageId)}" data-parent-comment="${esc(parentCommentId)}" data-parent-annotation="${esc(parentAnnotationId)}" type="button">추가 질문 / 답글</button></div>${open?`<form class="feedback-compose" data-feedback-reply-form="${esc(annotation.id)}" data-message="${esc(messageId)}" data-parent-comment="${esc(parentCommentId)}" data-parent-annotation="${esc(parentAnnotationId)}"><p class="feedback-compose-hint">선택 문장에 이어서 답글을 남겨요</p>${renderQuoteAttachment(annotation.quote,'답글 대상 문장')}<textarea name="comment" required maxlength="500" placeholder="추가 질문이나 답글을 입력해 주세요."></textarea><div class="feedback-compose-actions"><button type="button" data-feedback-cancel>취소</button><button class="primary" type="submit">답글 등록</button></div></form>`:''}`;
+}
 function renderFeedback(message){
   const annotations=message.annotations||[];if(!annotations.length)return '';
-  return `<div class="feedback-thread">${annotations.map(annotation=>`<article class="feedback-entry ${annotation.authorRole==='student'?'student-feedback':''}">${renderQuoteAttachment(annotation.quote,'드래그한 대화 문장')}${(annotation.comments||[]).map(comment=>`<div class="feedback-comment">${esc(comment.text)}<div class="feedback-comment-meta">${esc(comment.authorName)} · ${esc(comment.time||'방금')}</div></div>`).join('')}<div class="feedback-entry-actions"><button class="feedback-reply-button" data-feedback-reply="${esc(annotation.id)}" data-message="${esc(message.id)}" type="button">추가 질문 / 답글</button></div>${replyingTo?.messageId===message.id&&replyingTo.annotationId===annotation.id?`<form class="feedback-compose" data-feedback-reply-form="${esc(annotation.id)}" data-message="${esc(message.id)}"><p class="feedback-compose-hint">선택 문장에 이어서 답글을 남겨요</p>${renderQuoteAttachment(annotation.quote,'답글 대상 문장')}<textarea name="comment" required maxlength="500" placeholder="추가 질문이나 답글을 입력해 주세요."></textarea><div class="feedback-compose-actions"><button type="button" data-feedback-cancel>취소</button><button class="primary" type="submit">답글 등록</button></div></form>`:''}</article>`).join('')}</div>`;
+  return `<div class="feedback-thread">${annotations.map(annotation=>`<article class="feedback-entry ${annotation.authorRole==='student'?'student-feedback':''}">${renderQuoteAttachment(annotation.quote,'드래그한 대화 문장')}${renderFeedbackComments(annotation,message.id)}</article>`).join('')}</div>`;
 }
 function renderMessage(m,teacher,participantId,chatId,threadId){
   const mine=teacher?m.from==='teacher':(m.from==='student'||m.from===currentStudentId()||m.from==='me');
@@ -250,27 +264,31 @@ function renderMessage(m,teacher,participantId,chatId,threadId){
 }
 function handleMessageSelection(){
   const selection=window.getSelection();if(!selection||selection.isCollapsed||!openThread)return;
-  const range=selection.getRangeAt(0),startElement=(range.startContainer.nodeType===1?range.startContainer:range.startContainer.parentElement)?.closest('.message-text'),endElement=(range.endContainer.nodeType===1?range.endContainer:range.endContainer.parentElement)?.closest('.message-text');
+  const range=selection.getRangeAt(0),startNode=range.startContainer.nodeType===1?range.startContainer:range.startContainer.parentElement,endNode=range.endContainer.nodeType===1?range.endContainer:range.endContainer.parentElement,startElement=startNode?.closest('.message-text, .feedback-comment-text'),endElement=endNode?.closest('.message-text, .feedback-comment-text');
   if(!startElement||startElement!==endElement||startElement.dataset.feedbackTarget!=='true')return;
   const row=startElement.closest('.message-row');if(!row||row.dataset.threadId!==openThread.threadId)return;
   const offsetAt=(node,offset)=>{const prefix=document.createRange();prefix.selectNodeContents(startElement);prefix.setEnd(node,offset);return prefix.toString().length};
   let start=offsetAt(range.startContainer,range.startOffset),end=offsetAt(range.endContainer,range.endOffset);const text=startElement.textContent,raw=text.slice(start,end),leading=raw.length-raw.trimStart().length,trailing=raw.length-raw.trimEnd().length;start+=leading;end-=trailing;
   const quote=text.slice(start,end);if(!quote.trim())return;
-  pendingFeedback={chatId:row.dataset.chatId,threadId:row.dataset.threadId,messageId:row.dataset.messageId,start,end,quote};replyingTo=null;document.querySelectorAll('.feedback-compose[data-feedback-compose]').forEach(form=>form.remove());
+  const selectedComment=startElement.matches('.feedback-comment-text')?startElement.closest('[data-feedback-comment-id]'):null;
+  pendingFeedback={kind:selectedComment?'comment':'message',chatId:row.dataset.chatId,threadId:row.dataset.threadId,messageId:row.dataset.messageId,parentAnnotationId:selectedComment?.dataset.parentAnnotationId||'',commentId:selectedComment?.dataset.feedbackCommentId||'',start,end,quote};replyingTo=null;document.querySelectorAll('.feedback-compose[data-feedback-compose]').forEach(form=>form.remove());
   const colorClass=data.role==='teacher'?'teacher-feedback':'student-feedback';
-  row.insertAdjacentHTML('afterend',`<form class="feedback-compose ${colorClass}" data-feedback-compose><p class="feedback-compose-hint">선택한 문장에 질문이나 피드백을 남겨요</p>${renderQuoteAttachment(quote,'드래그한 문장') }<textarea name="comment" required maxlength="500" placeholder="${data.role==='teacher'?'학생에게 전할 피드백을 적어 주세요.':'교사에게 추가 질문을 남겨 보세요.'}"></textarea><div class="feedback-compose-actions"><button type="button" data-feedback-cancel>취소</button><button class="primary" type="submit">댓글 남기기</button></div></form>`);
-  selection.removeAllRanges();row.nextElementSibling.querySelector('textarea').focus();
+  const insertionPoint=selectedComment||row;
+  insertionPoint.insertAdjacentHTML('afterend',`<form class="feedback-compose ${colorClass}" data-feedback-compose><p class="feedback-compose-hint">선택한 문장에 질문이나 피드백을 남겨요</p>${renderQuoteAttachment(quote,'드래그한 문장')}<textarea name="comment" required maxlength="500" placeholder="${data.role==='teacher'?'학생에게 전할 피드백을 적어 주세요.':'교사에게 추가 질문을 남겨 보세요.'}"></textarea><div class="feedback-compose-actions"><button type="button" data-feedback-cancel>취소</button><button class="primary" type="submit">댓글 남기기</button></div></form>`);
+  selection.removeAllRanges();insertionPoint.nextElementSibling.querySelector('textarea').focus();
 }
 function locateFeedbackMessage(chatId,threadId,messageId){const thread=getChatThreads(chatId).find(item=>item.id===threadId);return thread?.messages?.find(message=>message.id===messageId)}
+function locateFeedbackComment(chatId,threadId,messageId,parentAnnotationId,commentId){const message=locateFeedbackMessage(chatId,threadId,messageId),annotation=findFeedbackAnnotation(message?.annotations,parentAnnotationId);return annotation?.comments?.find(comment=>comment.id===commentId)}
 function handleFeedbackSubmit(event){
   const form=event.target.closest('form[data-feedback-compose],form[data-feedback-reply-form]');if(!form)return;
   event.preventDefault();const text=String(new FormData(form).get('comment')||'').trim();if(!text)return;
   const comment={id:`comment-${Date.now()}`,authorRole:data.role,authorName:data.role==='teacher'?'박서연 선생님':data.studentName,text,time:new Intl.DateTimeFormat('ko-KR',{hour:'numeric',minute:'2-digit'}).format(new Date())};
   if(form.hasAttribute('data-feedback-compose')){
     if(!pendingFeedback)return;const target=locateFeedbackMessage(pendingFeedback.chatId,pendingFeedback.threadId,pendingFeedback.messageId);if(!target)return;
-    target.annotations ||= [];target.annotations.push({id:`feedback-${Date.now()}`,start:pendingFeedback.start,end:pendingFeedback.end,quote:pendingFeedback.quote,authorRole:data.role,comments:[comment]});pendingFeedback=null;
+    const annotation={id:`feedback-${Date.now()}`,start:pendingFeedback.start,end:pendingFeedback.end,quote:pendingFeedback.quote,authorRole:data.role,comments:[comment]};
+    if(pendingFeedback.kind==='comment'){const parent=locateFeedbackComment(pendingFeedback.chatId,pendingFeedback.threadId,pendingFeedback.messageId,pendingFeedback.parentAnnotationId,pendingFeedback.commentId);if(!parent)return;parent.annotations ||= [];parent.annotations.push(annotation)}else{target.annotations ||= [];target.annotations.push(annotation)}pendingFeedback=null;
   }else{
-    const row=form.closest('.message-row'),target=row&&locateFeedbackMessage(row.dataset.chatId,row.dataset.threadId,row.dataset.messageId),annotation=target?.annotations?.find(item=>item.id===form.dataset.feedbackReplyForm);if(!annotation)return;
+    const row=form.closest('.message-row'),target=row&&locateFeedbackMessage(row.dataset.chatId,row.dataset.threadId,row.dataset.messageId),parentCommentId=form.dataset.parentComment||'',parent=parentCommentId&&locateFeedbackComment(row.dataset.chatId,row.dataset.threadId,row.dataset.messageId,form.dataset.parentAnnotation,parentCommentId),annotation=parent?parent.annotations?.find(item=>item.id===form.dataset.feedbackReplyForm):target?.annotations?.find(item=>item.id===form.dataset.feedbackReplyForm);if(!annotation)return;
     annotation.comments ||= [];annotation.comments.push(comment);replyingTo=null;
   }
   save();renderChat();
@@ -281,7 +299,7 @@ function handleFeedbackClick(event){
   if(event.target.closest('[data-feedback-cancel]')){pendingFeedback=null;replyingTo=null;event.target.closest('.feedback-compose').remove();return}
   const button=event.target.closest('[data-feedback-reply]');if(!button)return;
   const row=button.closest('.message-row');if(!row)return;
-  pendingFeedback=null;replyingTo={messageId:row.dataset.messageId,annotationId:button.dataset.feedbackReply};renderChat();
+  pendingFeedback=null;replyingTo={messageId:row.dataset.messageId,annotationId:button.dataset.feedbackReply,commentId:button.dataset.parentComment||'',parentAnnotationId:button.dataset.parentAnnotation||''};renderChat();
 }
 const monthNames=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];let shownMonth=new Date(2026,9,1);
 function renderCalendar(){
