@@ -23,6 +23,10 @@
 .thread-list-view{max-width:760px;margin:0 auto;padding:20px 4px}.thread-list-heading{margin:0 0 18px}.thread-list-heading .eyebrow{margin:0 0 5px}.thread-list-heading h2{font:800 20px Manrope,'Noto Sans KR',sans-serif;letter-spacing:-.04em;margin:0}.thread-list-heading p{margin:5px 0 0;color:#89928b;font-size:12px}.thread-heading-row{display:flex;align-items:center;justify-content:space-between;gap:12px}.thread-new-button{min-height:38px;padding:0 13px;border:0;border-radius:9px;background:var(--navy);color:#fff;font-size:11px;font-weight:700}.thread-card-list{display:grid;gap:9px}.thread-card{width:100%;display:flex;align-items:center;gap:14px;padding:17px;border:1px solid var(--line);border-radius:13px;background:#fff;text-align:left;color:var(--ink);transition:border-color .16s,background .16s,transform .16s}.thread-card:hover{border-color:#cbdcbf;background:#fbfdf8;transform:translateY(-1px)}.thread-card-icon{width:42px;height:42px;flex:none;border-radius:13px;background:#eef4e9;color:#557849;display:grid;place-items:center}.thread-card-copy{min-width:0;flex:1}.thread-card-title,.thread-card-preview,.thread-card-meta{display:block}.thread-card-title{font-size:13px;font-weight:800}.thread-card-preview{font-size:12px;color:#778179;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:4px}.thread-card-meta{font-size:10px;color:#a0a79f;margin-top:6px}.thread-card-arrow{color:#9aa49b}.thread-list-back{display:none}.modal-intro{font-size:12px;line-height:1.7;color:#758078;margin:0 0 16px}.optional-label{font-weight:400;color:#9aa29b}
 .announcement-list{display:grid;gap:8px;padding:0 3px 10px}.announcement-list-item{width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:11px;padding:12px;color:var(--ink)}.announcement-list-item:hover{border-color:#cbdcbf;background:#fbfdf8}.announcement-list-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#929a93;font-size:10px}.deadline-pill{display:inline-flex;align-items:center;padding:3px 8px;border-radius:99px;background:#fff0d8;color:#946522;font-size:9px;font-weight:800;white-space:nowrap}.announcement-list-title{display:block;margin-top:7px;font-size:12px;font-weight:800}.announcement-list-preview{display:block;margin-top:4px;color:#7e8880;font-size:10px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.announcement-list-empty{padding:22px 12px;text-align:center;color:#8b948d;font-size:11px}.announcement-create{display:none}.announcement-detail-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:9px}.announcement-deadline{display:inline-flex;padding:4px 9px;border-radius:99px;background:#fff0d8;color:#946522;font-size:10px;font-weight:800}
 </style>
+<style>
+.student-inbox{max-width:780px;margin:0 auto;padding:22px 4px 36px}.inbox-intro{margin-bottom:22px}.inbox-intro .eyebrow{margin-bottom:5px}.inbox-intro h2{margin:0;font:800 21px Manrope,'Noto Sans KR',sans-serif;letter-spacing:-.04em}.inbox-intro p{margin:5px 0 0;color:#879188;font-size:12px}.inbox-section{margin-top:22px}.inbox-section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.inbox-section-head h3{margin:0;font-size:13px;font-weight:800}.inbox-section-head button{border:0;background:transparent;color:#517647;font-size:11px;font-weight:700}.inbox-group-block+.inbox-group-block{margin-top:14px}.inbox-group-name{font-size:10px;color:#8a938c;margin-bottom:7px}.inbox-empty{padding:12px;border:1px dashed #e1e7df;border-radius:10px;color:#929b93;font-size:11px}
+.inbox-group-name{display:flex;align-items:center;justify-content:space-between}.inbox-new-button{border:0;background:transparent;color:#517647;font-size:10px;font-weight:700}.inline-deadline{margin-left:7px;vertical-align:2px}.announcement-pane .announcement-detail{white-space:pre-wrap;line-height:1.8;font-size:13px;color:#5d695f}
+</style>
 </head>
 <body>
 <div class="app">
@@ -87,6 +91,7 @@ const initialData = {
 };
 let data;
 let openThread=null;
+let openAnnouncementId=null;
 let sidebarMode='chats';
 try{data=JSON.parse(localStorage.getItem(storageKey))||initialData}catch{data=initialData}
 data.announcements ||= initialData.announcements;
@@ -118,7 +123,7 @@ function getChatThreads(id){if(!data.chatThreads[id])data.chatThreads[id]=[{id:`
 function getLatestThread(id){return [...getChatThreads(id)].sort((a,b)=>(b.updatedAt||b.createdAt||0)-(a.updatedAt||a.createdAt||0))[0]}
 function getLast(id){const thread=getLatestThread(id),message=thread?.messages?.at(-1);return message?.text||(thread?`새 대화: ${thread.title}`:'새로운 대화를 시작해 보세요')}
 function getTime(id){const thread=getLatestThread(id);return thread?.messages?.at(-1)?.time||''}
-function setRole(role){data.role=role;openThread=null;if(role==='student'){data.studentId=currentStudentId();data.studentName=student(data.studentId)?.name||data.studentName;data.selectedId='teacher'}else if(data.selectedId==='teacher'||selectedPeerChat(data.selectedId))data.selectedId=data.students[0]?.id||'';save();render()}
+function setRole(role){data.role=role;openThread=null;openAnnouncementId=null;if(role==='student'){data.studentId=currentStudentId();data.studentName=student(data.studentId)?.name||data.studentName;data.selectedId='teacher'}else if(data.selectedId==='teacher'||selectedPeerChat(data.selectedId))data.selectedId=data.students[0]?.id||'';save();render()}
 function render(){
   const teacher=data.role==='teacher';
   $('#teacherRole').classList.toggle('active',teacher);$('#studentRole').classList.toggle('active',!teacher);
@@ -147,13 +152,28 @@ function renderContacts(){
   const renderRows=rows=>rows.length?rows.map(row=>`<button class="contact ${data.selectedId===row.id?'active':''}" data-contact="${esc(row.id)}" type="button">${row.avatar}<span class="contact-copy"><span class="contact-name">${esc(row.name)}${row.tag?`<span class="group-tag">${row.tag}</span>`:''}</span><span class="contact-preview">${esc(row.preview)}</span></span>${data.unread?.[row.id]?`<span class="unread">${data.unread[row.id]}</span>`:`<span class="contact-time">${esc(getTime(row.id))}</span>`}</button>`).join(''):'<div class="empty-state">아직 대화가 없어요.</div>';
   const section=(title,rows,pinned=false)=>`<section class="contact-section${pinned?' pinned':''}"><div class="contact-section-title">${title}<span class="section-count">${rows.length}</span></div>${renderRows(rows)}</section>`;
   $('#contactList').innerHTML=teacher?`${section('학생 대화',peopleRows)}${section('모둠 대화',groupRows)}`:`${section('모둠 대화',groupRows,true)}${section('선생님 대화',peopleRows)}`;
-  $('#contactList').querySelectorAll('[data-contact]').forEach(btn=>btn.addEventListener('click',()=>{sidebarMode='chats';data.selectedId=btn.dataset.contact;openThread=null;delete data.unread[data.selectedId];save();$('#shell').classList.add('chat-open');render()}));
+  $('#contactList').querySelectorAll('[data-contact]').forEach(btn=>btn.addEventListener('click',()=>{sidebarMode='chats';data.selectedId=btn.dataset.contact;openThread=null;openAnnouncementId=null;delete data.unread[data.selectedId];save();$('#shell').classList.add('chat-open');render()}));
 }
 function renderAnnouncementList(){
   $('#listLabel').textContent='공지사항';
   const announcements=[...data.announcements].sort((a,b)=>new Date(b.postedAt)-new Date(a.postedAt)).slice(0,3);
   $('#contactList').innerHTML=announcements.length?`<div class="announcement-list">${announcements.map(item=>`<button class="announcement-list-item" data-announcement="${esc(item.id)}" type="button"><span class="announcement-list-meta"><span>${formatPostedDate(item.postedAt)}</span>${item.deadlineAt?'<span class="deadline-pill">마감 확인</span>':''}</span><span class="announcement-list-title">${esc(item.title)}</span><span class="announcement-list-preview">${esc(item.content)}</span></button>`).join('')}</div><div class="announcement-list-empty">최신 공지 최대 3개를 게시일 순으로 보여드려요.</div>`:'<div class="announcement-list-empty">등록된 공지사항이 없어요.</div>';
   $('#contactList').querySelectorAll('[data-announcement]').forEach(button=>button.addEventListener('click',()=>openAnnouncementDetail(button.dataset.announcement)));
+}
+function renderStudentInbox(){
+  const announcements=[...data.announcements].sort((a,b)=>new Date(b.postedAt)-new Date(a.postedAt)).slice(0,3);
+  const teacherThreads=[...getChatThreads(currentStudentId())].sort((a,b)=>(b.updatedAt||b.createdAt||0)-(a.updatedAt||a.createdAt||0));
+  const groups=currentStudentGroups();
+  const groupThreads=groups.flatMap(g=>getChatThreads(g.id).map(thread=>({group:g,thread}))).sort((a,b)=>(b.thread.updatedAt||b.thread.createdAt||0)-(a.thread.updatedAt||a.thread.createdAt||0));
+  const noticeCards=announcements.map((item,index)=>`<button class="thread-card inbox-card" data-inbox-announcement="${esc(item.id)}" type="button"><span class="thread-card-icon"><svg viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 13v-2ZM5 14l2 7h4l-2-6M21 10v4"/></svg></span><span class="thread-card-copy"><span class="thread-card-title">공지사항 ${index+1}${item.deadlineAt?'<span class="deadline-pill inline-deadline">마감 확인</span>':''}</span><span class="thread-card-preview">${esc(item.title)} · ${esc(item.content)}</span><span class="thread-card-meta">게시 ${formatPostedDate(item.postedAt)}</span></span><svg class="thread-card-arrow" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>`).join('');
+  const teacherCards=teacherThreads.map((thread,index)=>{const latest=thread.messages?.at(-1);return `<button class="thread-card inbox-card" data-inbox-chat="teacher" data-inbox-thread="${esc(thread.id)}" type="button"><span class="thread-card-icon"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H6l-3 2v-6a7.5 7.5 0 1 1 17-3.5Z"/><path d="M8 10h8M8 14h5"/></svg></span><span class="thread-card-copy"><span class="thread-card-title">선생님과 대화 ${index+1}</span><span class="thread-card-preview">${esc(latest?.text||thread.title)}</span><span class="thread-card-meta">${esc(thread.title)} · 메시지 ${thread.messages?.length||0}개</span></span><svg class="thread-card-arrow" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>`}).join('');
+  const noAnnouncements='<div class="inbox-empty">새 공지사항이 없어요.</div>',noTeacherThreads='<div class="inbox-empty">선생님과 나눈 대화가 없어요.</div>',noGroupThreads='<div class="inbox-empty">모둠 대화가 아직 없어요.</div>';
+  const groupActions=groups.map(g=>`<div class="inbox-group-block"><div class="inbox-group-name">${esc(g.name)} <button class="inbox-new-button" data-new-group-thread="${esc(g.id)}" type="button">+ 새 대화</button></div>${groupThreads.filter(item=>item.group.id===g.id).map(({thread})=>{const index=groupThreads.findIndex(item=>item.thread.id===thread.id&&item.group.id===g.id);return `<button class="thread-card inbox-card" data-inbox-chat="${esc(g.id)}" data-inbox-thread="${esc(thread.id)}" type="button"><span class="thread-card-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M9.5 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 8v6M23 11h-6"/></svg></span><span class="thread-card-copy"><span class="thread-card-title">모둠 대화 ${index+1}</span><span class="thread-card-preview">${esc(thread.messages?.at(-1)?.text||thread.title)}</span><span class="thread-card-meta">${esc(g.name)} · 메시지 ${thread.messages?.length||0}개</span></span><svg class="thread-card-arrow" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>`}).join('')||noGroupThreads}</div>`).join('');
+  $('#messages').innerHTML=`<div class="student-inbox"><div class="inbox-intro"><p class="eyebrow">CLASS INBOX</p><h2>대화 목록</h2><p>공지사항과 선생님·모둠 대화를 한곳에서 확인하세요.</p></div><section class="inbox-section"><div class="inbox-section-head"><h3>공지사항</h3></div><div class="thread-card-list">${noticeCards||noAnnouncements}</div></section><section class="inbox-section"><div class="inbox-section-head"><h3>선생님과 대화</h3><button id="inboxNewPrivate" type="button">+ 새 대화</button></div><div class="thread-card-list">${teacherCards||noTeacherThreads}</div></section><section class="inbox-section"><div class="inbox-section-head"><h3>모둠 대화</h3></div>${groupActions||noGroupThreads}</section></div>`;
+  $('#messages').querySelectorAll('[data-inbox-announcement]').forEach(button=>button.addEventListener('click',()=>{openAnnouncementId=button.dataset.inboxAnnouncement;openThread=null;renderChat()}));
+  $('#messages').querySelectorAll('[data-inbox-chat]').forEach(button=>button.addEventListener('click',()=>{data.selectedId=button.dataset.inboxChat;openAnnouncementId=null;openThread={chatId:data.selectedId,threadId:button.dataset.inboxThread};render()}));
+  $('#inboxNewPrivate').addEventListener('click',()=>{data.selectedId='teacher';openAnnouncementId=null;openNewPrivateThread()});
+  $('#messages').querySelectorAll('[data-new-group-thread]').forEach(button=>button.addEventListener('click',()=>{data.selectedId=button.dataset.newGroupThread;openAnnouncementId=null;openNewGroupThread()}));
 }
 function renderChat(){
   let id=data.selectedId|| (data.role==='teacher'?data.students[0]?.id:'teacher');if(data.role==='student'&&!studentCanOpenConversation(id))id='teacher';data.selectedId=id;
@@ -163,10 +183,17 @@ function renderChat(){
   $('#chatAvatar').innerHTML=isGroup(id)?`<span class="person-avatar group-symbol">${esc(initials(title))}</span>`:avatar(id==='teacher'?'서':(student(id)?.name||getChatName(id)),id==='teacher'?1:(student(id)?.color||0));
   $('#chatTitle').textContent=title;$('#chatSubtitle').textContent=subtitle;
   const chatId=teacher?id:(selectedPeerChat(id)?id:(id==='teacher'?currentStudentId():id));
-  const threads=getChatThreads(chatId),activeThread=threads.find(thread=>openThread?.chatId===id&&thread.id===openThread.threadId),threadOpen=Boolean(activeThread),messages=activeThread?.messages||[];
+  const threads=getChatThreads(chatId),activeThread=threads.find(thread=>openThread?.chatId===id&&thread.id===openThread.threadId),threadOpen=Boolean(activeThread),announcement=openAnnouncementId?data.announcements.find(item=>item.id===openAnnouncementId):null,announcementOpen=!teacher&&!threadOpen&&Boolean(announcement),messages=activeThread?.messages||[];
   if(threadOpen){
     const notice=teacher?'학생과 나눈 대화는 기록되어 언제든 확인할 수 있어요.':'안내: 선생님은 학생과 주고받은 대화 내용을 확인할 수 있어요.';
     $('#messages').innerHTML=`<div class="date-divider">오늘</div><div class="notice">${teacher?'<svg style="width:12px;height:12px;vertical-align:-2px;margin-right:3px" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>':''}<strong>${teacher?'대화 기록 안내':'대화 안내'}</strong> · ${notice}</div>${messages.map(m=>renderMessage(m,teacher,id)).join('')||`<div class="empty-state">아직 대화가 없어요.<br>메시지를 보내 대화를 시작해 보세요.</div>`}`;
+  }else if(announcementOpen){
+    $('#chatTitle').textContent=announcement.title;$('#chatSubtitle').textContent='공지사항';$('#chatAvatar').innerHTML=avatar('공',4);
+    const deadline=announcement.deadlineAt?`<span class="announcement-deadline">마감 확인 · ${formatDate(announcement.deadlineAt)}</span>`:'';
+    $('#messages').innerHTML=`<div class="thread-list-view announcement-pane"><div class="thread-list-heading"><p class="eyebrow">CLASS NOTICE · ${formatPostedDate(announcement.postedAt)}</p><h2>${esc(announcement.title)}</h2><p>게시일 ${formatPostedDate(announcement.postedAt)}</p>${deadline}</div><article class="announcement-detail"><p>${esc(announcement.content)}</p></article></div>`;
+  }else if(!teacher){
+    $('#chatTitle').textContent='대화 목록';$('#chatSubtitle').textContent='공지사항과 선생님·모둠 대화';$('#chatAvatar').innerHTML=avatar('함',2);
+    openAnnouncementId=null;renderStudentInbox();
   }else{
     const sortedThreads=[...threads].sort((a,b)=>(b.updatedAt||b.createdAt||0)-(a.updatedAt||a.createdAt||0));
     const cards=sortedThreads.map(thread=>{const latest=thread.messages?.at(-1),preview=latest?.text||'아직 대화가 없어요. 눌러서 대화를 시작해 보세요.';return `<button class="thread-card" data-open-thread="${esc(thread.id)}" type="button"><span class="thread-card-icon"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H6l-3 2v-6a7.5 7.5 0 1 1 17-3.5Z"/><path d="M8 10h8M8 14h5"/></svg></span><span class="thread-card-copy"><span class="thread-card-title">${esc(thread.title)}</span><span class="thread-card-preview">${esc(preview)}</span><span class="thread-card-meta">메시지 ${thread.messages?.length||0}개${latest?.time?` · 최근 ${esc(latest.time)}`:''}</span></span><svg class="thread-card-arrow" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>`}).join('');
@@ -176,7 +203,7 @@ function renderChat(){
     $('#newGroupThread')?.addEventListener('click',openNewGroupThread);
     $('#newPrivateThread')?.addEventListener('click',openNewPrivateThread);
   }
-  $('#threadListBack').style.display=threadOpen?'grid':'none';$('#composerWrap').style.display=threadOpen?'':'none';
+  $('#threadListBack').style.display=threadOpen||announcementOpen?'grid':'none';$('#composerWrap').style.display=threadOpen?'':'none';
   $('#messages').scrollTop=$('#messages').scrollHeight;
   $('#messageInput').placeholder=isGroup(id)?`${title} 친구들에게 메시지 보내기`:`${title}에게 메시지 보내기`;
   $('#composeHint').textContent=teacher?'Enter로 전송 · 이 대화는 기록됩니다':'Enter로 전송 · 선생님이 대화를 확인할 수 있어요';
@@ -260,14 +287,14 @@ function openAnnouncementDetail(id){
 $('#teacherRole').addEventListener('click',()=>setRole('teacher'));$('#studentRole').addEventListener('click',()=>setRole('student'));
 $('#classPicker').addEventListener('change',e=>{const next=e.target.value;data.classrooms[data.className]={students:data.students,groups:data.groups,studentId:data.studentId,studentName:data.studentName};const room=data.classrooms[next]||classPresets[next];data.className=next;data.students=room.students;data.groups=room.groups;data.studentId=room.studentId||room.students[0]?.id||'';data.studentName=room.studentName||student(data.studentId)?.name||data.studentName;data.selectedId=data.students[0]?.id||'';save();render();notify(`${data.className} 학생 목록을 불러왔어요.`)});
 $('#calendarToggle').addEventListener('click',toggleCalendar);$('#calendarHeader').addEventListener('click',toggleCalendar);
-$('#announcementNav').addEventListener('click',()=>{sidebarMode='announcements';openThread=null;$('#calendarDrawer').classList.remove('open');$('#calendarToggle').classList.remove('selected');render()});
+$('#announcementNav').addEventListener('click',()=>{sidebarMode='announcements';openThread=null;openAnnouncementId=null;$('#calendarDrawer').classList.remove('open');$('#calendarToggle').classList.remove('selected');render()});
 $('#addAnnouncementButton').addEventListener('click',openAnnouncementModal);
 $('#addGroupButton').addEventListener('click',openGroupModal);$('#groupCreateShortcut').addEventListener('click',openGroupModal);$('#groupHeader').addEventListener('click',openGroupModal);
 $('#historyButton').addEventListener('click',()=>notify(data.role==='teacher'?'학생과 주고받은 대화는 이 대화창에 기록돼요.':'선생님은 학생과 주고받은 대화를 확인할 수 있어요.'));
 $('#messageForm').addEventListener('submit',e=>{e.preventDefault();sendMessage($('#messageInput').value)});
 $('#messageInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('#messageForm').requestSubmit()}if(e.key==='Enter'&&e.shiftKey){setTimeout(()=>{e.target.style.height='auto';e.target.style.height=`${Math.min(e.target.scrollHeight,100)}px`},0)}});
-$('#modalClose').addEventListener('click',closeModal);$('#modalBackdrop').addEventListener('click',e=>{if(e.target.id==='modalBackdrop')closeModal()});$('#threadListBack').addEventListener('click',()=>{openThread=null;renderChat()});$('#mobileBack').addEventListener('click',()=>{openThread=null;$('#shell').classList.remove('chat-open')});
-$('#chatNav').addEventListener('click',()=>{sidebarMode='chats';if(innerWidth<=720)$('#shell').classList.remove('chat-open');$('#calendarDrawer').classList.remove('open');$('#calendarToggle').classList.remove('selected');render()});
+$('#modalClose').addEventListener('click',closeModal);$('#modalBackdrop').addEventListener('click',e=>{if(e.target.id==='modalBackdrop')closeModal()});$('#threadListBack').addEventListener('click',()=>{openThread=null;openAnnouncementId=null;renderChat()});$('#mobileBack').addEventListener('click',()=>{openThread=null;openAnnouncementId=null;$('#shell').classList.remove('chat-open')});
+$('#chatNav').addEventListener('click',()=>{sidebarMode='chats';openThread=null;openAnnouncementId=null;if(innerWidth<=720)$('#shell').classList.remove('chat-open');$('#calendarDrawer').classList.remove('open');$('#calendarToggle').classList.remove('selected');render()});
 render();if(innerWidth<=720)$('#shell').classList.add('chat-open');
 </script>
 </body>
